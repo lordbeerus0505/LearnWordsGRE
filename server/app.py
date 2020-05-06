@@ -9,6 +9,8 @@ import socket
 from flask import request
 from server.words import WordLists
 app = Flask(__name__)
+from urllib.request import urlopen
+import re
 from mongoengine import *
 connect("barrons",host='mongodb+srv://abhiram:abhiram@cluster0-snm3i.mongodb.net/test?retryWrites=true&w=majority')
 
@@ -49,6 +51,13 @@ class Words(Document):
     hostName = StringField(max_length=100, required=True)
     word_list = DictField()
     flagged_words = DictField()
+
+
+def getPublicIp():
+    data = str(urlopen('http://checkip.dyndns.com/').read())
+    # data = '<html><head><title>Current IP Check</title></head><body>Current IP Address: 65.96.168.198</body></html>\r\n'
+
+    return re.compile(r'Address: (\d+\.\d+\.\d+\.\d+)').search(data).group(1)
 
 def saveMessageSender(userId, chatWith, message):
     user = Users.objects(userId = userId)
@@ -106,11 +115,10 @@ def home():
 def get_words():
 
     learnt = True
-
-    wordUser = Words.objects(hostName = socket.gethostname())
+    # import pdb; pdb.set_trace()
+    wordUser = Words.objects(hostName = socket.gethostname(), ipAddress = getPublicIp())
     while learnt != False:
-        wordUser = Words.objects.get(hostName = socket.gethostname())
-
+        wordUser = Words.objects(hostName = socket.gethostname(), ipAddress = getPublicIp()).get()
         word_list = wordUser.word_list
 
         word = random.choice(list(word_list.keys()))
@@ -124,7 +132,7 @@ def get_words():
 @app.route('/get-flagged-word', methods=['GET'])
 def get_flagged_words():
 
-    wordUser = Words.objects.get(hostName = socket.gethostname())
+    wordUser = Words.objects(hostName = socket.gethostname(), ipAddress = getPublicIp()).get()
     print('Found user')
     flagged_words = wordUser.flagged_words
 
@@ -137,7 +145,7 @@ def get_flagged_words():
 @app.route('/learnt-word', methods=['POST'])
 def learnt_word():
 
-    wordUser = Words.objects.get(hostName = socket.gethostname())
+    wordUser = Words.objects(hostName = socket.gethostname(), ipAddress = getPublicIp()).get()
     word = request.get_json()['word']
     wordUser.word_list[word][0].update({'learnt':True})
     wordUser.save()
@@ -146,7 +154,7 @@ def learnt_word():
     learnt = True
 
     while learnt != False:
-        wordUser = Words.objects.get(hostName = socket.gethostname())
+        wordUser = Words.objects(hostName = socket.gethostname(), ipAddress = getPublicIp()).get()
 
         word_list = wordUser.word_list
 
@@ -161,7 +169,7 @@ def learnt_word():
 @app.route('/add-flag', methods=['POST'])
 def add_flag():
 
-    wordUser = Words.objects.get(hostName = socket.gethostname())
+    wordUser = Words.objects(hostName = socket.gethostname(), ipAddress = getPublicIp()).get()
     word = request.get_json()['word']
     meaning = request.get_json()['meaning']
     wordUser.flagged_words.update({word:meaning})
@@ -173,7 +181,7 @@ def add_flag():
 @app.route('/forgot-word', methods=['POST'])
 def forgot_word():
     
-    wordUser = Words.objects.get(hostName = socket.gethostname())
+    wordUser = Words.objects(hostName = socket.gethostname(), ipAddress = getPublicIp()).get()
 
     """ 
 
@@ -188,7 +196,7 @@ def forgot_word():
     learnt = True
 
     while learnt != False:
-        wordUser = Words.objects.get(hostName = socket.gethostname())
+        wordUser = Words.objects(hostName = socket.gethostname(), ipAddress = getPublicIp()).get()
 
         word_list = wordUser.word_list
 
@@ -224,7 +232,7 @@ def login():
     if wordUser:
         wordUser = Words.objects(userId = userId, password = hashlib.md5(password.encode()).hexdigest()).get()
         wordUser.hostName = socket.gethostname()
-        wordUser.ipAddress = socket.gethostbyname("")
+        wordUser.ipAddress = getPublicIp()
         wordUser.save()
         
         return {'Success':True}
@@ -253,7 +261,7 @@ def signup():
         lastName = lastName,
         password = h.hexdigest(),
         hostName = socket.gethostname(),
-        ipAddress = socket.gethostbyname("")
+        ipAddress = getPublicIp()
     )
 
     wordUser.word_list.update(word_list)
