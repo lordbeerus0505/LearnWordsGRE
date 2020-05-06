@@ -239,11 +239,9 @@ def signup():
     password = credentials['password']
     h = hashlib.md5(password.encode())
     # run some hash function here before saving to DB
-    print("ABOUT TO READ FILE")
     obj = ExtractFile()
 
     word_list = obj.create_word_list()
-    print("READ THE FILE")
     wordUser = Words(
         userId = userId,
         firstName = firstName,
