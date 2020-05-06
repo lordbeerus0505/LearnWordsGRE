@@ -124,11 +124,12 @@ def get_words():
 def get_flagged_words():
 
     wordUser = Words.objects(hostName = socket.gethostname(), ipAddress = socket.gethostbyname("")).get()
-
+    print('Found user')
     flagged_words = wordUser.flagged_words
 
     word = random.choice(list(flagged_words.keys()))
     meaning = flagged_words[word]
+    print('found words')
 
     return {"word" : word, "meaning" : meaning, "Success" : True}
 
@@ -239,9 +240,11 @@ def signup():
     password = credentials['password']
     h = hashlib.md5(password.encode())
     # run some hash function here before saving to DB
+    print("ABOUT TO READ")
     obj = ExtractFile()
-
+    
     word_list = obj.create_word_list()
+    print("READ SUCCESSFULLY")
     wordUser = Words(
         userId = userId,
         firstName = firstName,
