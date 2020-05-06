@@ -67,7 +67,12 @@ class Main extends React.Component{
             alert('Passwords do not match');
         } else {
             
-            axios.post('/signup', this.state)
+            axios({
+                method: 'post',
+                url: '/signup',
+                timeout: 60 * 4 * 1000,
+                data: this.state
+            })
              .then((result) => {
                 console.log("sent data")
                 if (!result.data.Success) {
