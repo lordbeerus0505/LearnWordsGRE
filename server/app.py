@@ -14,7 +14,7 @@ connect("barrons",host='mongodb+srv://abhiram:abhiram@cluster0-snm3i.mongodb.net
 
 class ExtractFile :
     def create_word_list(self):
-        data_frame = pd.read_excel('barrons.xlsx')
+        data_frame = pd.read_excel('Barrons.xlsx')
         word_list = {}
         for k,v in data_frame.iterrows():
             word_list.update({v[0]:[{"meaning":v[1],"sentence":"","learnt":False}]})
@@ -41,6 +41,11 @@ class Users(Document):
 
 class Words(Document):
     userId = StringField(max_length=100, unique=True, required=True)
+    password = StringField(max_length=105, required=True)
+    firstName = StringField(max_length=25, required=True)
+    lastName = StringField(max_length=25, required=True)
+    ipAddress = StringField(max_length=16, required=True)
+    hostName = StringField(max_length=100, required=True)
     word_list = DictField()
     flagged_words = DictField()
 
@@ -98,11 +103,12 @@ def home():
 
 @app.route('/get-words', methods=['GET'])
 def get_words():
-    userId = 'abhiram'
+
     learnt = True
 
+    wordUser = Words.objects(hostName = socket.gethostname(), ipAddress = socket.gethostbyname(""))
     while learnt != False:
-        wordUser = Words.objects(userId = userId).get()
+        wordUser = Words.objects(hostName = socket.gethostname(), ipAddress = socket.gethostbyname("")).get()
 
         word_list = wordUser.word_list
 
@@ -116,9 +122,8 @@ def get_words():
 
 @app.route('/get-flagged-word', methods=['GET'])
 def get_flagged_words():
-    userId = 'abhiram'
 
-    wordUser = Words.objects(userId = userId).get()
+    wordUser = Words.objects(hostName = socket.gethostname(), ipAddress = socket.gethostbyname("")).get()
 
     flagged_words = wordUser.flagged_words
 
@@ -129,8 +134,8 @@ def get_flagged_words():
 
 @app.route('/learnt-word', methods=['POST'])
 def learnt_word():
-    userId = 'abhiram'
-    wordUser = Words.objects(userId = userId).get()
+
+    wordUser = Words.objects(hostName = socket.gethostname(), ipAddress = socket.gethostbyname("")).get()
     word = request.get_json()['word']
     wordUser.word_list[word][0].update({'learnt':True})
     wordUser.save()
@@ -139,7 +144,7 @@ def learnt_word():
     learnt = True
 
     while learnt != False:
-        wordUser = Words.objects(userId = userId).get()
+        wordUser = Words.objects(hostName = socket.gethostname(), ipAddress = socket.gethostbyname("")).get()
 
         word_list = wordUser.word_list
 
@@ -153,8 +158,8 @@ def learnt_word():
 
 @app.route('/add-flag', methods=['POST'])
 def add_flag():
-    userId = 'abhiram'
-    wordUser = Words.objects(userId = userId).get()
+
+    wordUser = Words.objects(hostName = socket.gethostname(), ipAddress = socket.gethostbyname("")).get()
     word = request.get_json()['word']
     meaning = request.get_json()['meaning']
     wordUser.flagged_words.update({word:meaning})
@@ -165,8 +170,8 @@ def add_flag():
 
 @app.route('/forgot-word', methods=['POST'])
 def forgot_word():
-    userId = 'abhiram'
-    wordUser = Words.objects(userId = userId).get()
+    
+    wordUser = Words.objects(hostName = socket.gethostname(), ipAddress = socket.gethostbyname("")).get()
 
     """ 
 
@@ -181,7 +186,7 @@ def forgot_word():
     learnt = True
 
     while learnt != False:
-        wordUser = Words.objects(userId = userId).get()
+        wordUser = Words.objects(hostName = socket.gethostname(), ipAddress = socket.gethostbyname("")).get()
 
         word_list = wordUser.word_list
 
@@ -210,11 +215,16 @@ def check_creds():
 @app.route('/login',methods=['POST'])
 def login():
     credentials = request.get_json()
-    userId = credentials['mobileNumber']
+    userId = credentials['emailAddress']
     password = credentials['password']
 
-    user = Users.objects(userId = userId, password = hashlib.md5(password.encode()))
-    if user:
+    wordUser = Words.objects(userId = userId, password = hashlib.md5(password.encode()).hexdigest())
+    if wordUser:
+        wordUser = Words.objects(userId = userId, password = hashlib.md5(password.encode()).hexdigest()).get()
+        wordUser.hostName = socket.gethostname()
+        wordUser.ipAddress = socket.gethostbyname("")
+        wordUser.save()
+        
         return {'Success':True}
     else:
         return {'Success':False}
@@ -223,14 +233,17 @@ def login():
 @app.route('/signup',methods=['POST'])
 def signup():
     credentials = request.get_json()
-    userId = credentials['mobileNumber']
+    userId = credentials['emailAddress']
     firstName = credentials['firstName']
     lastName = credentials['lastName']
     password = credentials['password']
     h = hashlib.md5(password.encode())
     # run some hash function here before saving to DB
 
-    user = Users(
+    obj = ExtractFile()
+
+    word_list = obj.create_word_list()
+    wordUser = Words(
         userId = userId,
         firstName = firstName,
         lastName = lastName,
@@ -238,9 +251,10 @@ def signup():
         hostName = socket.gethostname(),
         ipAddress = socket.gethostbyname("")
     )
-    user.save()
 
-    print(user, 'is the user id')
+    wordUser.word_list.update(word_list)
+    wordUser.save() 
+
     return {'Success':True}
 
 @app.route('/text_chat')

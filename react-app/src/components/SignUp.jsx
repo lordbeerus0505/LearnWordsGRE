@@ -56,10 +56,10 @@ class SignUp extends React.Component {
              .then((result) => {
                 console.log("sent data")
                 if (!result.data.Success) {
-                    this.props.history.push('/auth/signup');
+                    this.props.history.push('/');
                     alert("Unable to SignUp")
                 } else {
-                    this.props.history.push('/dashboard/');
+                    this.props.history.push('/learn/');
                 }
              });
         }

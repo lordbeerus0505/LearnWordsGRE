@@ -1,8 +1,8 @@
+import Login from './Login';
+import SignUp from './SignUp';
+
 var React = require('react');
 var {Route, Switch} = require('react-router-dom');
-
-var Login = require('./Login');
-var SignUp = require('./SignUp');
 
 var Auth = (props) => {
     const path = props.match.path;
@@ -15,4 +15,4 @@ var Auth = (props) => {
     );
 }
 
-module.exports = Auth;
+export default Auth;
