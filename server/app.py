@@ -109,7 +109,7 @@ def get_words():
 
     wordUser = Words.objects(hostName = socket.gethostname(), ipAddress = socket.gethostbyname(""))
     while learnt != False:
-        wordUser = Words.objects(hostName = socket.gethostname(), ipAddress = socket.gethostbyname("")).get()
+        wordUser = Words.objects.get(hostName = socket.gethostname(), ipAddress = socket.gethostbyname(""))
 
         word_list = wordUser.word_list
 
@@ -124,7 +124,7 @@ def get_words():
 @app.route('/get-flagged-word', methods=['GET'])
 def get_flagged_words():
 
-    wordUser = Words.objects(hostName = socket.gethostname(), ipAddress = socket.gethostbyname("")).get()
+    wordUser = Words.objects.get(hostName = socket.gethostname(), ipAddress = socket.gethostbyname(""))
     print('Found user')
     flagged_words = wordUser.flagged_words
 
@@ -137,7 +137,7 @@ def get_flagged_words():
 @app.route('/learnt-word', methods=['POST'])
 def learnt_word():
 
-    wordUser = Words.objects(hostName = socket.gethostname(), ipAddress = socket.gethostbyname("")).get()
+    wordUser = Words.objects.get(hostName = socket.gethostname(), ipAddress = socket.gethostbyname(""))
     word = request.get_json()['word']
     wordUser.word_list[word][0].update({'learnt':True})
     wordUser.save()
@@ -146,7 +146,7 @@ def learnt_word():
     learnt = True
 
     while learnt != False:
-        wordUser = Words.objects(hostName = socket.gethostname(), ipAddress = socket.gethostbyname("")).get()
+        wordUser = Words.objects.get(hostName = socket.gethostname(), ipAddress = socket.gethostbyname(""))
 
         word_list = wordUser.word_list
 
@@ -161,7 +161,7 @@ def learnt_word():
 @app.route('/add-flag', methods=['POST'])
 def add_flag():
 
-    wordUser = Words.objects(hostName = socket.gethostname(), ipAddress = socket.gethostbyname("")).get()
+    wordUser = Words.objects.get(hostName = socket.gethostname(), ipAddress = socket.gethostbyname(""))
     word = request.get_json()['word']
     meaning = request.get_json()['meaning']
     wordUser.flagged_words.update({word:meaning})
@@ -173,7 +173,7 @@ def add_flag():
 @app.route('/forgot-word', methods=['POST'])
 def forgot_word():
     
-    wordUser = Words.objects(hostName = socket.gethostname(), ipAddress = socket.gethostbyname("")).get()
+    wordUser = Words.objects.get(hostName = socket.gethostname(), ipAddress = socket.gethostbyname(""))
 
     """ 
 
@@ -188,7 +188,7 @@ def forgot_word():
     learnt = True
 
     while learnt != False:
-        wordUser = Words.objects(hostName = socket.gethostname(), ipAddress = socket.gethostbyname("")).get()
+        wordUser = Words.objects.get(hostName = socket.gethostname(), ipAddress = socket.gethostbyname(""))
 
         word_list = wordUser.word_list
 
