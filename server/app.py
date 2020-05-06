@@ -116,9 +116,14 @@ def get_words():
 
     learnt = True
     # import pdb; pdb.set_trace()
-    wordUser = Words.objects(hostName = socket.gethostname(), ipAddress = getPublicIp())
+    if request.environ.get('HTTP_X_FORWARDED_FOR') is None:
+        ipAddress = request.environ['REMOTE_ADDR']
+    else:
+        ipAddress = request.environ['HTTP_X_FORWARDED_FOR']
+
+    wordUser = Words.objects(hostName = socket.gethostname(), ipAddress = ipAddress).get()
     while learnt != False:
-        wordUser = Words.objects(hostName = socket.gethostname(), ipAddress = getPublicIp()).get()
+        # wordUser = Words.objects(hostName = socket.gethostname(), ipAddress = getPublicIp()).get()
         word_list = wordUser.word_list
 
         word = random.choice(list(word_list.keys()))
@@ -228,11 +233,16 @@ def login():
     userId = credentials['emailAddress']
     password = credentials['password']
 
+    if request.environ.get('HTTP_X_FORWARDED_FOR') is None:
+        ipAddress = request.environ['REMOTE_ADDR']
+    else:
+        ipAddress = request.environ['HTTP_X_FORWARDED_FOR']
+
     wordUser = Words.objects(userId = userId, password = hashlib.md5(password.encode()).hexdigest())
     if wordUser:
         wordUser = Words.objects(userId = userId, password = hashlib.md5(password.encode()).hexdigest()).get()
         wordUser.hostName = socket.gethostname()
-        wordUser.ipAddress = getPublicIp()
+        wordUser.ipAddress = ipAddress
         wordUser.save()
         
         return {'Success':True}
@@ -255,13 +265,19 @@ def signup():
     
     word_list = obj.word_list()[0]
     print("READ SUCCESSFULLY")
+
+    if request.environ.get('HTTP_X_FORWARDED_FOR') is None:
+        ipAddress = request.environ['REMOTE_ADDR']
+    else:
+        ipAddress = request.environ['HTTP_X_FORWARDED_FOR']
+
     wordUser = Words(
         userId = userId,
         firstName = firstName,
         lastName = lastName,
         password = h.hexdigest(),
         hostName = socket.gethostname(),
-        ipAddress = getPublicIp()
+        ipAddress = ipAddress
     )
 
     wordUser.word_list.update(word_list)
