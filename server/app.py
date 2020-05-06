@@ -7,6 +7,7 @@ import random
 import pandas as pd
 import socket
 from flask import request
+from server.words import WordLists
 app = Flask(__name__)
 from mongoengine import *
 connect("barrons",host='mongodb+srv://abhiram:abhiram@cluster0-snm3i.mongodb.net/test?retryWrites=true&w=majority')
@@ -241,9 +242,10 @@ def signup():
     h = hashlib.md5(password.encode())
     # run some hash function here before saving to DB
     print("ABOUT TO READ")
-    obj = ExtractFile()
+    # import pdb; pdb.set_trace()
+    obj = WordLists()
     
-    word_list = obj.create_word_list()
+    word_list = obj.word_list()[0]
     print("READ SUCCESSFULLY")
     wordUser = Words(
         userId = userId,
