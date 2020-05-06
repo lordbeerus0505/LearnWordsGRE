@@ -137,7 +137,12 @@ def get_words():
 @app.route('/get-flagged-word', methods=['GET'])
 def get_flagged_words():
 
-    wordUser = Words.objects(hostName = socket.gethostname(), ipAddress = getPublicIp()).get()
+    if request.environ.get('HTTP_X_FORWARDED_FOR') is None:
+        ipAddress = request.environ['REMOTE_ADDR']
+    else:
+        ipAddress = request.environ['HTTP_X_FORWARDED_FOR']
+
+    wordUser = Words.objects(hostName = socket.gethostname(), ipAddress = ipAddress).get()
     print('Found user')
     flagged_words = wordUser.flagged_words
 
@@ -150,7 +155,12 @@ def get_flagged_words():
 @app.route('/learnt-word', methods=['POST'])
 def learnt_word():
 
-    wordUser = Words.objects(hostName = socket.gethostname(), ipAddress = getPublicIp()).get()
+    if request.environ.get('HTTP_X_FORWARDED_FOR') is None:
+        ipAddress = request.environ['REMOTE_ADDR']
+    else:
+        ipAddress = request.environ['HTTP_X_FORWARDED_FOR']
+
+    wordUser = Words.objects(hostName = socket.gethostname(), ipAddress = ipAddress).get()
     word = request.get_json()['word']
     wordUser.word_list[word][0].update({'learnt':True})
     wordUser.save()
@@ -159,10 +169,7 @@ def learnt_word():
     learnt = True
 
     while learnt != False:
-        wordUser = Words.objects(hostName = socket.gethostname(), ipAddress = getPublicIp()).get()
-
         word_list = wordUser.word_list
-
         word = random.choice(list(word_list.keys()))
         meaning = word_list[word]
         learnt = meaning[0]['learnt']
@@ -174,7 +181,12 @@ def learnt_word():
 @app.route('/add-flag', methods=['POST'])
 def add_flag():
 
-    wordUser = Words.objects(hostName = socket.gethostname(), ipAddress = getPublicIp()).get()
+    if request.environ.get('HTTP_X_FORWARDED_FOR') is None:
+        ipAddress = request.environ['REMOTE_ADDR']
+    else:
+        ipAddress = request.environ['HTTP_X_FORWARDED_FOR']
+
+    wordUser = Words.objects(hostName = socket.gethostname(), ipAddress = ipAddress).get()
     word = request.get_json()['word']
     meaning = request.get_json()['meaning']
     wordUser.flagged_words.update({word:meaning})
@@ -185,8 +197,6 @@ def add_flag():
 
 @app.route('/forgot-word', methods=['POST'])
 def forgot_word():
-    
-    wordUser = Words.objects(hostName = socket.gethostname(), ipAddress = getPublicIp()).get()
 
     """ 
 
@@ -200,11 +210,15 @@ def forgot_word():
     # Find the next word from DB
     learnt = True
 
+    if request.environ.get('HTTP_X_FORWARDED_FOR') is None:
+        ipAddress = request.environ['REMOTE_ADDR']
+    else:
+        ipAddress = request.environ['HTTP_X_FORWARDED_FOR']
+
+    wordUser = Words.objects(hostName = socket.gethostname(), ipAddress = ipAddress).get()
+
     while learnt != False:
-        wordUser = Words.objects(hostName = socket.gethostname(), ipAddress = getPublicIp()).get()
-
         word_list = wordUser.word_list
-
         word = random.choice(list(word_list.keys()))
         meaning = word_list[word]
         learnt = meaning[0]['learnt']
