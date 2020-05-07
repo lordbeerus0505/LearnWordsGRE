@@ -1,5 +1,9 @@
 <h1 align="center">React + Flask based app to learn words from the Barron's guide for GRE</h1>
 
+## Deployment
+
+https://learnwordsgre.herokuapp.com/#/
+
 ## Project overview
 
 This project shows how to render a full stack application with ReactJS Front End and Python Flask back end
