@@ -40,6 +40,17 @@ button {
     width: 100% !important;
 }
 
+.content {
+    width: 60%;
+    margin: auto;
+    margin-top: 2%;
+}
+
+.giphy {
+    width: 500px;
+    margin: auto;
+}
+
 @media only screen and (max-width: 600px) {
 
     .homepage-modal {
@@ -62,4 +73,16 @@ button {
         width: 80%;
         margin-left: 30% !important;
     }
+
+    .content {
+        width: 60%;
+        margin: auto;
+        margin-top: 10%;
+    }
+
+    .giphy {
+        width: 250px;
+        margin: auto;
+    }
+
 }

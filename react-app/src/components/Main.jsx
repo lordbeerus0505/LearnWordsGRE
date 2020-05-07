@@ -105,7 +105,7 @@ class Main extends React.Component{
             <div>
                 <Navbar expand="lg" color="info">
                     <Container>
-                        <NavbarBrand href="#pablo" onClick={e => e.preventDefault()}>Lets Learn Words</NavbarBrand>
+                        <NavbarBrand onClick={e => e.preventDefault()}>Lets Learn Words</NavbarBrand>
                         <NavbarToggler onClick={this.toggle}>
                             <span className="navbar-toggler-bar navbar-kebab"></span>
                             <span className="navbar-toggler-bar navbar-kebab"></span>
@@ -127,7 +127,25 @@ class Main extends React.Component{
                         </Collapse>
                     </Container>
                 </Navbar>
-
+                <div className="main-body">
+                    <div className="content text-center">
+                        <h1>Learn GRE words taken from the Essential 800 words of Barron's List</h1>
+                        <h2>SignUp to Get Started</h2>
+                        <br/>
+                        <br/>
+                        <h2>Features:</h2>
+                        <ul>
+                            <li><h3>One stop to ace the GRE verbal</h3></li>
+                            <li><h3>Flag words that you have a difficulty remembering</h3></li>
+                            <li><h3>AI based word iteration to help you learn fastest</h3></li>
+                            <li><h3>Keep track of your performance with a streak count</h3></li>
+                        </ul>
+                    </div>
+                    
+                    <div className="giphy text-center">
+                        <img src={require('../assets/trump.gif')} alt="loading..." />
+                    </div>
+                </div>
                 <Modal
                     className="modal-login homepage-modal"
                     modalClassName=" modal-info"
