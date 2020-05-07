@@ -272,13 +272,14 @@ def signup():
     lastName = credentials['lastName']
     password = credentials['password']
     h = hashlib.md5(password.encode())
-    # run some hash function here before saving to DB
-    print("ABOUT TO READ")
+    wordUser = Words.objects(userId = userId)
+
+    if wordUser:
+        return {'Success':False}
     # import pdb; pdb.set_trace()
     obj = WordLists()
     
     word_list = obj.word_list()[0]
-    print("READ SUCCESSFULLY")
 
     if request.environ.get('HTTP_X_FORWARDED_FOR') is None:
         ipAddress = request.environ['REMOTE_ADDR']

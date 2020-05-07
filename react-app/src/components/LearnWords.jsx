@@ -1,4 +1,6 @@
 import { Card, CardImg, CardBody, CardTitle, CardText, Button, CardFooter, CardHeader, Alert } from 'reactstrap';
+import { faSignOutAlt, faCheck, faTimes, faFlag } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 var React = require('react');
 const axios = require('axios');
@@ -9,7 +11,9 @@ class LearnWords extends React.Component {
     state = {
         word : "",
         meaning : "",
-        revealMeaning : ""
+        revealMeaning : "",
+        className : "",
+        content : ""
     }
 
     componentDidMount = () => {
@@ -78,9 +82,12 @@ class LearnWords extends React.Component {
     }
 
     revealMeaning = () => {
+
         this.setState({
             revealMeaning : this.state.meaning
         })
+
+        document.getElementsByClassName('meaning-card')[0].style.visibility = 'visible';
     }
 
     openFlaggedWords = () => {
@@ -104,6 +111,10 @@ class LearnWords extends React.Component {
                 
              });
     }
+
+    Logout = () => {
+        this.props.history.push("/")
+    }
     
     hideAlert = () => {
         document.getElementsByClassName('alerts')[0].style.visibility = 'hidden';
@@ -113,29 +124,35 @@ class LearnWords extends React.Component {
         return (
             <div>
                 <div className="alerts" style={{visibility:"hidden"}} onClick={this.hideAlert.bind(this)}>
-                    <Alert color='success'>Word has been flagged</Alert>
+                    <Alert color='info'>Word has been flagged</Alert>
                 </div>
                 <div className="flagged-words">
                     <Button className='btn-simple btn-round' color='info'  onClick={this.openFlaggedWords.bind(this)}>Flagged Words</Button>
                 </div>
+                <div className="logout">
+                    <Button className='btn-simple btn-round' color='info'  onClick={this.Logout.bind(this)}><FontAwesomeIcon icon={faSignOutAlt}/></Button>
+                </div>
                 <div className="learn-words">
-                    <Card className="learn-card">
-                        <CardHeader className="text-center">
+                    <Card className="learn-card text-center" onClick={this.revealMeaning.bind(this)}>
+                        <CardBody>
                             <CardTitle>{this.state.word}</CardTitle>
-                        </CardHeader>
-                        <CardBody className="card-body" className="text-center">
-                            <CardText>{this.state.revealMeaning}</CardText>
-                            <br/>
-                            <Button color='info' onClick={this.revealMeaning.bind(this)}>Reveal</Button>
                         </CardBody>
-                        <CardFooter className="text-center">
-                            <Button onClick={this.rememberWord.bind(this)} color='primary' className='button-size'>I remember this</Button>
-                            <Button onClick={this.dontRememberWord.bind(this)} color='warning' className='button-size'>Dont Remember yet</Button>
-                            <br/>
-                            <br/>
-                            <Button onClick={this.flagWord.bind(this)} color='danger'>Flag Word</Button>
-                        </CardFooter>
                     </Card>
+                    <Card className="learn-card text-center meaning-card" style={{visibility:"hidden"}}>
+                        <CardBody>
+                            <CardText className="meaning">{this.state.revealMeaning}</CardText>
+                        </CardBody>
+                    </Card>
+                    <Card className="learn-card text-center operations">
+                        <CardBody>
+                            <Button onClick={this.rememberWord.bind(this)} color='primary' className='button-size'><FontAwesomeIcon icon={faCheck} size='2x'/></Button>
+                            <Button onClick={this.dontRememberWord.bind(this)} color='warning' className='button-size'><FontAwesomeIcon icon={faTimes} size='2x'/></Button>
+                            <br/>
+                            <br/>
+                            <Button onClick={this.flagWord.bind(this)} color='danger'><FontAwesomeIcon icon={faFlag} size='2x'/></Button>
+                        </CardBody>
+                    </Card>
+
                 </div>
             </div> 
         );

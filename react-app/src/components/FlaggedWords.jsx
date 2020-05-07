@@ -1,4 +1,6 @@
 import { Card, CardImg, CardBody, CardTitle, CardText, Button, CardFooter, CardHeader, Alert } from 'reactstrap';
+import { faSignOutAlt } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 var React = require('react');
 const axios = require('axios');
@@ -77,6 +79,9 @@ class FlaggedWords extends React.Component {
                 </div>
                 <div className="flagged-words">
                     <Button className='btn-simple btn-round' color='info' onClick={this.openLearnWords.bind(this)}>Learn Words</Button>
+                </div>
+                <div className="logout">
+                    <Button className='btn-simple btn-round' color='info'  onClick={this.Logout.bind(this)}><FontAwesomeIcon icon={faSignOutAlt}/></Button>
                 </div>
                 <div className="learn-words">
                     <Card className="learn-card">

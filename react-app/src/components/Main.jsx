@@ -1,6 +1,6 @@
 import React from 'react';
 import { Navbar, Container, NavbarBrand, NavbarToggler, Collapse, Nav, NavItem, NavLink } from 'reactstrap';
-import{ Button, Modal, ModalHeader, ModalBody, ModalFooter, Card, InputGroup, InputGroupAddon, InputGroupText, Form , Input} from 'reactstrap';
+import{ Button, Modal, ModalHeader, ModalBody, ModalFooter, Card, InputGroup, InputGroupAddon, InputGroupText, Form , Input, Alert} from 'reactstrap';
 import { faUser, faEnvelope, faKey, faUserCircle } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
@@ -19,7 +19,8 @@ class Main extends React.Component{
             lastName : '',
             emailAddress : '',
             password : '',
-            confirmPassword : ''
+            confirmPassword : '',
+            message : ''
         };
     }
 
@@ -67,17 +68,14 @@ class Main extends React.Component{
             alert('Passwords do not match');
         } else {
             
-            axios({
-                method: 'post',
-                url: '/signup',
-                timeout: 60 * 4 * 1000,
-                data: this.state
-            })
+            axios.post('/signup', this.state)
              .then((result) => {
-                console.log("sent data")
                 if (!result.data.Success) {
-                    this.props.history.push('/auth/signup');
-                    alert("Unable to SignUp")
+                    this.setState({message:'Username already taken'})
+                    document.getElementsByClassName('alerts-main-page')[0].style.visibility = 'visible';
+                    setTimeout(function() { 
+                        document.getElementsByClassName('alerts-main-page')[0].style.visibility = 'hidden';
+                    }, 2000);
                 } else {
                     this.props.history.push('/learn/');
                 }
@@ -91,13 +89,21 @@ class Main extends React.Component{
              .then((result) => {
 
                 if (!result.data.Success) {
-                    this.props.history.push('/auth/login');
-                    alert("Unable to Login");
+                    console.log("here we are")
+                    this.setState({message:'Incorrect Username or Password'})
+                    document.getElementsByClassName('alerts-main-page')[0].style.visibility = 'visible';
+                    setTimeout(function() { 
+                        document.getElementsByClassName('alerts-main-page')[0].style.visibility = 'hidden';
+                    }, 2000);
                 } else {
                     this.props.history.push('/learn/');
                 }
              });
         
+    }
+
+    hideAlert = () => {
+        document.getElementsByClassName('alerts')[0].style.visibility = 'hidden';
     }
 
     render(){
@@ -127,6 +133,10 @@ class Main extends React.Component{
                         </Collapse>
                     </Container>
                 </Navbar>
+                <br/>
+                <div className="alerts-main-page" style={{visibility:"hidden"}} onClick={this.hideAlert.bind(this)}>
+                    <Alert color='warning'>{this.state.message}</Alert>
+                </div>
                 <div className="main-body">
                     <div className="content text-center">
                         <h1>Learn GRE words taken from the Essential 800 words of Barron's List</h1>
