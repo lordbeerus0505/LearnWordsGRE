@@ -57,7 +57,7 @@ class LearnWords extends React.Component {
                 }
                 
              });
-
+        document.getElementsByClassName('meaning-card')[0].style.visibility = 'hidden';
     }
 
     dontRememberWord = () => {
@@ -79,6 +79,7 @@ class LearnWords extends React.Component {
                 }
                 
              });
+        document.getElementsByClassName('meaning-card')[0].style.visibility = 'hidden';
     }
 
     revealMeaning = () => {
@@ -145,7 +146,7 @@ class LearnWords extends React.Component {
                     </Card>
                     <Card className="learn-card text-center operations">
                         <CardBody>
-                            <Button onClick={this.rememberWord.bind(this)} color='primary' className='button-size'><FontAwesomeIcon icon={faCheck} size='2x'/></Button>
+                            <Button onClick={this.rememberWord.bind(this)} color='success' className='button-size'><FontAwesomeIcon icon={faCheck} size='2x'/></Button>
                             <Button onClick={this.dontRememberWord.bind(this)} color='warning' className='button-size'><FontAwesomeIcon icon={faTimes} size='2x'/></Button>
                             <br/>
                             <br/>
