@@ -129,7 +129,7 @@ class Main extends React.Component{
                 </Navbar>
 
                 <Modal
-                    className="modal-login"
+                    className="modal-login homepage-modal"
                     modalClassName=" modal-info"
                     isOpen={this.state.modalLogin}
                     toggle={this.toggleModalLogin.bind(this)}
@@ -187,7 +187,7 @@ class Main extends React.Component{
                     </Card>
                 </Modal>  
                 <Modal
-                    className="modal-login"
+                    className="modal-login homepage-modal"
                     modalClassName=" modal-info"
                     isOpen={this.state.modalSignUp}
                     toggle={this.toggleModalSignUp.bind(this)}

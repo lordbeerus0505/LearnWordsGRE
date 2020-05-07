@@ -39,3 +39,27 @@ button {
 .get-started {
     width: 100% !important;
 }
+
+@media only screen and (max-width: 600px) {
+
+    .homepage-modal {
+        margin: auto !important;
+        margin-top: 20% !important;
+    }
+
+    .learn-words {
+        margin: auto;
+        margin-top: 30%;
+        padding: 20px;
+    }
+
+    .flagged-words {
+        float: left;
+        margin-left: 5%;
+    }
+
+    .alerts {
+        width: 80%;
+        margin-left: 30% !important;
+    }
+}

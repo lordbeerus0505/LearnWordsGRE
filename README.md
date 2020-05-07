@@ -1,8 +1,8 @@
-<h1 align="center">Serving a react app with a flask server</h1>
+<h1 align="center">React + Flask based app to learn words from the Barron's guide for GRE</h1>
 
 ## Project overview
 
-This project shows how to serve a simple react application created by `create-react-app` with a flask server.
+This project shows how to render a full stack application with ReactJS Front End and Python Flask back end
 
 ## Getting Started
 
@@ -14,15 +14,11 @@ Ensure that you have the following tools available on your machine;
 
 - [Git](https://git-scm.com/) A distributed version control system
 - [Python](https://www.python.org/) A general purpose programming language
-- [node](https://nodejs.org/en/) A JavaScript runtime
-- A tool to create isolated Python environments preferably [Virtualenv](https://virtualenv.pypa.io/en/stable/)
 - [Pip](https://pypi.org/project/pip/) A tool for installing python packages
 - [create-react-app](https://create-react-app.dev/) A supported way of creating single-page React applications
-- [yarn](https://www.npmjs.com/package/yarn) A package manager for javascript
+- [npm]() Node package manager to install dependencies for React
 
 ### Installing
-
-While in your preferred terminal;
 
 Start by cloning the repository to your local machine
 
@@ -32,12 +28,12 @@ git clone https://github.com/learningdollars/sushan-reactapp-flask.git
 cd sushan-reactapp-flask/
 ```
 
-Make and activate a python virtual environment using `virtualenv`
+Make and activate a python virtual environment using `conda` or any other virtual environment
 
 ```bash
-virtualenv venv
+conda create --name "name" python = 3.7
 
-source venv/bin/activate
+source activate "name"
 ```
 
 With the virtual environment activated, install the project dependencies for the flask server
@@ -51,7 +47,8 @@ cd react-app/
 ```
 
 ```bash
-yarn install
+npm install
+npm run build
 ```
 
 ## Serving the application
@@ -59,8 +56,9 @@ yarn install
 You can start a local server by running
 
 ```bash
-cd flask-server
-python3 main.py
+cd ..
+python wsgi.py
+
 ```
 visit http://127.0.0.1:5000/ to view your application.
 
@@ -71,4 +69,4 @@ visit http://127.0.0.1:5000/ to view your application.
 
 ## Authors
 
-See also the list of [contributors](https://github.com/learningdollars/sushan-reactapp-flask/graphs/contributors) who participated in this project.
+Abhiram Natarajan (lordbeerus0505)
