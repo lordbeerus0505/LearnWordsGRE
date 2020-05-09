@@ -1,8 +1,8 @@
 import { Card, CardImg, CardBody, CardTitle, CardText, Button, CardFooter, CardHeader, Alert } from 'reactstrap';
-import { faSignOutAlt, faCheck, faTimes, faFlag } from '@fortawesome/free-solid-svg-icons'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faSignOutAlt, faCheck, faTimes, faFlag } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import React from 'react';
 
-var React = require('react');
 const axios = require('axios');
 var ReactDOM = require('react-dom');
 
@@ -11,7 +11,6 @@ class LearnWords extends React.Component {
     state = {
         word : "",
         meaning : "",
-        revealMeaning : "",
         className : "",
         content : ""
     }
@@ -30,8 +29,7 @@ class LearnWords extends React.Component {
 
                     this.setState({
                         word : word,
-                        meaning : meaning,
-                        revealMeaning : ""
+                        meaning : meaning
                     })
 
                 }
@@ -51,8 +49,7 @@ class LearnWords extends React.Component {
 
                     this.setState({
                         word : word,
-                        meaning : meaning,
-                        revealMeaning : ""
+                        meaning : meaning
                     })
                 }
                 
@@ -73,8 +70,7 @@ class LearnWords extends React.Component {
 
                     this.setState({
                         word : word,
-                        meaning : meaning,
-                        revealMeaning : ""
+                        meaning : meaning
                     })
                 }
                 
@@ -83,11 +79,6 @@ class LearnWords extends React.Component {
     }
 
     revealMeaning = () => {
-
-        this.setState({
-            revealMeaning : this.state.meaning
-        })
-
         document.getElementsByClassName('meaning-card')[0].style.visibility = 'visible';
     }
 
@@ -122,6 +113,7 @@ class LearnWords extends React.Component {
     }
 
     render() {
+
         return (
             <div>
                 <div className="alerts" style={{visibility:"hidden"}} onClick={this.hideAlert.bind(this)}>
@@ -134,14 +126,16 @@ class LearnWords extends React.Component {
                     <Button className='btn-simple btn-round' color='info'  onClick={this.Logout.bind(this)}><FontAwesomeIcon icon={faSignOutAlt}/></Button>
                 </div>
                 <div className="learn-words">
-                    <Card className="learn-card text-center" onClick={this.revealMeaning.bind(this)}>
+                    <Card className="learn-card text-center" 
+                        onMouseOver = {this.revealMeaning.bind(this)}
+                    >
                         <CardBody>
                             <CardTitle>{this.state.word}</CardTitle>
                         </CardBody>
                     </Card>
                     <Card className="learn-card text-center meaning-card" style={{visibility:"hidden"}}>
                         <CardBody>
-                            <CardText className="meaning">{this.state.revealMeaning}</CardText>
+                            <CardText className="meaning">{this.state.meaning}</CardText>
                         </CardBody>
                     </Card>
                     <Card className="learn-card text-center operations">

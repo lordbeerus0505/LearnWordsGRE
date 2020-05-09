@@ -11,7 +11,6 @@ class FlaggedWords extends React.Component {
     state = {
         word : "",
         meaning : "",
-        revealMeaning : ""
     }
 
     componentDidMount = () => {
@@ -27,8 +26,7 @@ class FlaggedWords extends React.Component {
                     console.log(result.data)
                     this.setState({
                         word : word,
-                        meaning : meaning,
-                        revealMeaning : ""
+                        meaning : meaning
                     })
 
                 }
@@ -49,8 +47,7 @@ class FlaggedWords extends React.Component {
 
                     this.setState({
                         word : word,
-                        meaning : meaning,
-                        revealMeaning : ""
+                        meaning : meaning
                     })
                 }
                 
@@ -59,11 +56,6 @@ class FlaggedWords extends React.Component {
     }
 
     revealMeaning = () => {
-
-        this.setState({
-            revealMeaning : this.state.meaning
-        })
-
         document.getElementsByClassName('meaning-card')[0].style.visibility = 'visible';
     }
 
@@ -92,14 +84,16 @@ class FlaggedWords extends React.Component {
                     <Button className='btn-simple btn-round' color='info'  onClick={this.Logout.bind(this)}><FontAwesomeIcon icon={faSignOutAlt}/></Button>
                 </div>
                 <div className="learn-words">
-                    <Card className="learn-card text-center" onClick={this.revealMeaning.bind(this)}>
+                    <Card className="learn-card text-center" 
+                        onMouseOver = {this.revealMeaning.bind(this)}
+                    >
                         <CardBody>
                             <CardTitle>{this.state.word}</CardTitle>
                         </CardBody>
                     </Card>
                     <Card className="learn-card text-center meaning-card" style={{visibility:"hidden"}}>
                         <CardBody>
-                            <CardText className="meaning">{this.state.revealMeaning}</CardText>
+                            <CardText className="meaning">{this.state.meaning}</CardText>
                         </CardBody>
                     </Card>
                     <Card className="learn-card text-center operations">
