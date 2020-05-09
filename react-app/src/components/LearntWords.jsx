@@ -31,7 +31,6 @@ class LearntWords extends React.Component {
 
     NotLearnt = (key) => {
 
-        console.log(key, "is the word")
         axios.post('/not-learnt-word', {'word' : key})
              .then((result) => {
 

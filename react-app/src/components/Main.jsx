@@ -1,6 +1,6 @@
 import React from 'react';
 import { Navbar, Container, NavbarBrand, NavbarToggler, Collapse, Nav, NavItem, NavLink } from 'reactstrap';
-import{ Button, Modal, ModalHeader, ModalBody, ModalFooter, Card, InputGroup, InputGroupAddon, InputGroupText, Form , Input, Alert} from 'reactstrap';
+import{ Button, Modal, Progress, ModalBody, ModalFooter, Card, InputGroup, InputGroupAddon, InputGroupText, Form , Input, Alert} from 'reactstrap';
 import { faUser, faEnvelope, faKey, faUserCircle } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
@@ -20,8 +20,26 @@ class Main extends React.Component{
             emailAddress : '',
             password : '',
             confirmPassword : '',
-            message : ''
+            message : '',
+            progressBar : 0,
+            progressBarPercent : 0
         };
+    }
+
+    componentDidMount = () => {
+        axios.get('/progress-bar', this.state)
+             .then((result) => {
+
+                if (!result.data.Success) {
+                    console.log("here we are")
+                } else {
+                    this.setState({
+                        progressBar : result.data.learnt,
+                        progressBarPercent : 100.0*result.data.learnt/800.0
+                    });
+                    console.log('Progress value', this.state.progressBar)
+                }
+             });
     }
 
     toggle() {
@@ -77,10 +95,31 @@ class Main extends React.Component{
                         document.getElementsByClassName('alerts-main-page')[0].style.visibility = 'hidden';
                     }, 2000);
                 } else {
-                    this.props.history.push('/learn/');
+                    this.props.history.push('/');
+                    this.toggleModalSignUp();
+                    this.setState({
+                        message : "SignUp Successful, click on Learn Words to start learning"
+                    });
+                    document.getElementsByClassName('alerts-main-page')[0].style.visibility = 'visible';
+                    setTimeout(function() { 
+                        document.getElementsByClassName('alerts-main-page')[0].style.visibility = 'hidden';
+                    }, 2000);
+
                 }
              });
         }
+
+        axios.get('/progress-bar', this.state)
+            .then((result) => {
+
+            if (!result.data.Success) {
+                console.log("here we are")
+            } else {
+                this.setState({
+                    progressBar : result.data.learnt
+                });
+            }
+            });
     }
 
     Login = () => {
@@ -96,10 +135,35 @@ class Main extends React.Component{
                         document.getElementsByClassName('alerts-main-page')[0].style.visibility = 'hidden';
                     }, 2000);
                 } else {
-                    this.props.history.push('/learn/');
+                    this.props.history.push('/');
+                    this.toggleModalLogin();
+                    this.setState({
+                        message : "Login Successful, click on Learn Words to start learning"
+                    });
+                    document.getElementsByClassName('alerts-main-page')[0].style.visibility = 'visible';
+                    setTimeout(function() { 
+                        document.getElementsByClassName('alerts-main-page')[0].style.visibility = 'hidden';
+                    }, 2000);
+
                 }
              });
+
+        axios.get('/progress-bar', this.state)
+            .then((result) => {
+
+            if (!result.data.Success) {
+                console.log("here we are")
+            } else {
+                this.setState({
+                    progressBar : result.data.learnt
+                });
+            }
+            });
         
+    }
+
+    LearnWords = () => {
+        this.props.history.push('/learn/');
     }
 
     hideAlert = () => {
@@ -111,7 +175,7 @@ class Main extends React.Component{
             <div>
                 <Navbar expand="lg" color="info">
                     <Container>
-                        <NavbarBrand onClick={e => e.preventDefault()}>Lets Learn Words</NavbarBrand>
+                        <NavbarBrand onClick={e => e.preventDefault()}>Learn Words GRE</NavbarBrand>
                         <NavbarToggler onClick={this.toggle}>
                             <span className="navbar-toggler-bar navbar-kebab"></span>
                             <span className="navbar-toggler-bar navbar-kebab"></span>
@@ -127,6 +191,11 @@ class Main extends React.Component{
                                 <NavItem>
                                     <NavLink onClick={this.toggleModalSignUp.bind(this)}>
                                         SignUp
+                                    </NavLink>
+                                </NavItem>
+                                <NavItem>
+                                    <NavLink onClick={this.LearnWords.bind(this)}>
+                                        Learn Words
                                     </NavLink>
                                 </NavItem>
                             </Nav>
@@ -155,7 +224,26 @@ class Main extends React.Component{
                     <div className="giphy text-center">
                         <img src={require('../assets/trump.gif')} alt="loading..." />
                     </div>
+                    <br/>
+
+                    <br/>
+                    <div className='progressBar'>
+                        <Card>
+                            <div className="progress-container progress-info">
+                                <br/>
+                                <div>
+                                    <h4 className="progressBadgePosition">Progress</h4>
+                                </div>
+                                <br/>
+                                <Progress max="800" value={this.state.progressBar} barClassName="progress-bar-info" className='progressBarValue'>
+                                    <span>{this.state.progressBarPercent}%</span>
+                                </Progress>
+                                <br/>
+                            </div>
+                        </Card>
+                    </div>
                 </div>
+                
                 <Modal
                     className="modal-login homepage-modal"
                     modalClassName=" modal-info"

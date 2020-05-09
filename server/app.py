@@ -52,13 +52,6 @@ class Words(Document):
     word_list = DictField()
     flagged_words = DictField()
 
-
-def getPublicIp():
-    data = str(urlopen('http://checkip.dyndns.com/').read())
-    # data = '<html><head><title>Current IP Check</title></head><body>Current IP Address: 65.96.168.198</body></html>\r\n'
-
-    return re.compile(r'Address: (\d+\.\d+\.\d+\.\d+)').search(data).group(1)
-
 def saveMessageSender(userId, chatWith, message):
     user = Users.objects(userId = userId)
     if not user:
@@ -133,6 +126,29 @@ def get_words():
     meaning = meaning[0]['meaning']
 
     return {"word" : word, "meaning" : meaning, "Success" : True}
+
+@app.route('/progress-bar', methods=['GET'])
+def progress_bar():
+
+    learnt = True
+
+    if request.environ.get('HTTP_X_FORWARDED_FOR') is None:
+        ipAddress = request.environ['REMOTE_ADDR']
+    else:
+        ipAddress = request.environ['HTTP_X_FORWARDED_FOR']
+
+    count = 0
+    if not Words.objects(hostName = socket.gethostname(), ipAddress = ipAddress):
+        return {'learnt' : 0, "Success" : True}
+
+    wordUser = Words.objects(hostName = socket.gethostname(), ipAddress = ipAddress).get()
+
+    word_list = wordUser.word_list
+
+    for key in word_list:
+        count += 1 if (word_list[key][0]['learnt']) == True else 0
+
+    return {"learnt" : count,  "Success" : True}
 
 @app.route('/get-learnt-words', methods=['GET'])
 def leart_wrods():
