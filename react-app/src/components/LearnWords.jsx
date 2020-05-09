@@ -2,6 +2,7 @@ import { Card, CardImg, CardBody, CardTitle, CardText, Button, CardFooter, CardH
 import { faSignOutAlt, faCheck, faTimes, faFlag } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
+import GaugeChart from 'react-gauge-chart';
 
 const axios = require('axios');
 var ReactDOM = require('react-dom');
@@ -12,7 +13,8 @@ class LearnWords extends React.Component {
         word : "",
         meaning : "",
         className : "",
-        content : ""
+        content : "",
+        streak : 0.5,
     }
 
     componentDidMount = () => {
@@ -31,7 +33,7 @@ class LearnWords extends React.Component {
                         word : word,
                         meaning : meaning
                     })
-
+                    this.getStreak();
                 }
              });
     }
@@ -51,6 +53,8 @@ class LearnWords extends React.Component {
                         word : word,
                         meaning : meaning
                     })
+
+                    this.postStreak('increase');
                 }
                 
              });
@@ -72,10 +76,40 @@ class LearnWords extends React.Component {
                         word : word,
                         meaning : meaning
                     })
+                    this.postStreak('decrease');
                 }
                 
              });
         document.getElementsByClassName('meaning-card')[0].style.visibility = 'hidden';
+    }
+
+    getStreak = () => {
+
+        axios.get('/get-streak')
+            .then((result) => {
+
+            if (!result.data.Success) {
+                console.log("here we are")
+            } else {
+                this.setState({
+                    streak : (result.data.streak + 50)/100.0
+                });
+                console.log('Strreak is now', this.state.streak)
+            }
+            });
+    }
+
+    postStreak = (change) => {
+
+        axios.post('/post-streak',{'streakChange':change})
+            .then((result) => {
+
+            if (!result.data.Success) {
+                console.log("here we are")
+            } else {
+                this.getStreak();
+            }
+            });
     }
 
     revealMeaning = () => {
@@ -154,6 +188,21 @@ class LearnWords extends React.Component {
                         </CardBody>
                     </Card>
 
+                </div>
+                <div className='learn-streak'>
+                    <Card>
+                        <CardBody>
+                            <CardTitle>Streak Count</CardTitle>
+                        </CardBody>
+                        <GaugeChart id="gauge-chart" 
+                            nrOfLevels={50}
+                            colors={['#00ff00', '#00ffff', '#0000ff']}
+                            percent={this.state.streak}
+                            arcWidth={0.3} 
+                            arcPadding={0.02}
+                            formatTextValue={value => value - 50}
+                        />
+                    </Card>
                 </div>
             </div> 
         );

@@ -133,6 +133,13 @@ button {
     font-size: x-large;
 }
 
+.learn-streak {
+    margin: auto;
+    margin-top: 5%;
+    float: right;
+    width: 20%;
+}
+
 @media only screen and (max-width: 600px) {
 
     .homepage-modal {
@@ -230,5 +237,11 @@ button {
     .streak {
         width: 90%;
         margin: auto;
+    }
+
+    .learn-streak {
+        margin: auto;
+        margin-top: 155%;
+        width: 90%;
     }
 }
