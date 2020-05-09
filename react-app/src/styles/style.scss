@@ -117,6 +117,11 @@ button {
     margin: auto;
 }
 
+.streak {
+    width: 40%;
+    margin: auto;
+}
+
 .progressBarValue {
     width: 80%;
     height: 30px;
@@ -126,6 +131,13 @@ button {
 .progressBadgePosition {
     margin-left: 10%;
     font-size: x-large;
+}
+
+.learn-streak {
+    margin: auto;
+    margin-top: 5%;
+    float: right;
+    width: 20%;
 }
 
 @media only screen and (max-width: 600px) {
@@ -220,5 +232,16 @@ button {
     .progressBadgePosition {
         margin-left: 10%;
         font-size: x-large;
+    }
+
+    .streak {
+        width: 90%;
+        margin: auto;
+    }
+
+    .learn-streak {
+        margin: auto;
+        margin-top: 155%;
+        width: 90%;
     }
 }

@@ -49,6 +49,7 @@ class Words(Document):
     lastName = StringField(max_length=25, required=True)
     ipAddress = StringField(max_length=16, required=True)
     hostName = StringField(max_length=100, required=True)
+    streak = IntField(required=False)
     word_list = DictField()
     flagged_words = DictField()
 
@@ -108,7 +109,7 @@ def home():
 def get_words():
 
     learnt = True
-    # import pdb; pdb.set_trace()
+
     if request.environ.get('HTTP_X_FORWARDED_FOR') is None:
         ipAddress = request.environ['REMOTE_ADDR']
     else:
@@ -116,7 +117,6 @@ def get_words():
 
     wordUser = Words.objects(hostName = socket.gethostname(), ipAddress = ipAddress).get()
     while learnt != False:
-        # wordUser = Words.objects(hostName = socket.gethostname(), ipAddress = getPublicIp()).get()
         word_list = wordUser.word_list
 
         word = random.choice(list(word_list.keys()))
@@ -149,6 +149,56 @@ def progress_bar():
         count += 1 if (word_list[key][0]['learnt']) == True else 0
 
     return {"learnt" : count,  "Success" : True}
+
+@app.route('/post-streak', methods=['POST'])
+def post_streak():
+
+    learnt = True
+
+    if request.environ.get('HTTP_X_FORWARDED_FOR') is None:
+        ipAddress = request.environ['REMOTE_ADDR']
+    else:
+        ipAddress = request.environ['HTTP_X_FORWARDED_FOR']
+
+    count = 0
+    if not Words.objects(hostName = socket.gethostname(), ipAddress = ipAddress):
+        return {'streak' : 0, "Success" : True}
+
+    streak = request.get_json()['streakChange']
+    wordUser = Words.objects(hostName = socket.gethostname(), ipAddress = ipAddress).get()
+
+    if streak == 'increase':
+        if wordUser.streak > 0:
+            wordUser.streak = wordUser.streak + 1
+        else:
+            wordUser.streak = 0
+    elif streak == 'decrease':
+        if wordUser.streak <= 0:
+            wordUser.streak = wordUser.streak - 1
+        else:
+            wordUser.streak = 0
+
+    wordUser.save()
+
+    return {'streak' : wordUser.streak, 'Success' : True}
+
+@app.route('/get-streak', methods=['GET'])
+def get_streak():
+
+    learnt = True
+
+    if request.environ.get('HTTP_X_FORWARDED_FOR') is None:
+        ipAddress = request.environ['REMOTE_ADDR']
+    else:
+        ipAddress = request.environ['HTTP_X_FORWARDED_FOR']
+
+    count = 0
+    if not Words.objects(hostName = socket.gethostname(), ipAddress = ipAddress):
+        return {'learnt' : 0, "Success" : True}
+
+    wordUser = Words.objects(hostName = socket.gethostname(), ipAddress = ipAddress).get()
+
+    return {'streak' : wordUser.streak, 'Success' : True}
 
 @app.route('/get-learnt-words', methods=['GET'])
 def leart_wrods():
