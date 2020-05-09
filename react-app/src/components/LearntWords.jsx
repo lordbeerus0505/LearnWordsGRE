@@ -16,7 +16,6 @@ class LearntWords extends React.Component {
     }
 
     componentDidMount = () => {
-        var word, meaning, learnt_words = {}
         axios.get('/get-learnt-words')
              .then((result) => {
 
@@ -28,14 +27,11 @@ class LearntWords extends React.Component {
                     })
                 }
              });
-        
-
     }
 
     NotLearnt = (key) => {
 
         console.log(key, "is the word")
-        var word, meaning
         axios.post('/not-learnt-word', {'word' : key})
              .then((result) => {
 
@@ -49,7 +45,6 @@ class LearntWords extends React.Component {
                 }
                 
              });
-        // document.getElementsByClassName('meaning-card')[0].style.visibility = 'hidden';
     }
 
     revealMeaning = () => {
