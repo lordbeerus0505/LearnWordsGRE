@@ -1,5 +1,5 @@
 import React from 'react';
-import { Navbar, Container, NavbarBrand, NavbarToggler, Collapse, Nav, NavItem, NavLink } from 'reactstrap';
+import { Navbar, Container, NavbarBrand, NavbarToggler, Collapse, Nav, NavItem, NavLink, CardBody, CardTitle } from 'reactstrap';
 import{ Button, Modal, Progress, ModalBody, ModalFooter, Card, InputGroup, InputGroupAddon, InputGroupText, Form , Input, Alert} from 'reactstrap';
 import { faUser, faEnvelope, faKey, faUserCircle } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -237,11 +237,9 @@ class Main extends React.Component{
                     <div className='progressBar'>
                         <Card>
                             <div className="progress-container progress-info">
-                                <br/>
-                                <div>
-                                    <h4 className="progressBadgePosition">Progress</h4>
-                                </div>
-                                <br/>
+                                <CardBody>
+                                    <CardTitle>Progress</CardTitle>
+                                </CardBody>
                                 <Progress max="800" value={this.state.progressBar} barClassName="progress-bar-info" className='progressBarValue'>
                                     <span>{this.state.progressBarPercent}%</span>
                                 </Progress>
@@ -250,14 +248,19 @@ class Main extends React.Component{
                         </Card>
                     </div>
                     <div className='streak'>
-                        <GaugeChart id="gauge-chart2" 
-                           nrOfLevels={50}
-                           colors={['#00ff00', '#00ffff', '#0000ff']}
-                           percent={this.state.streak}
-                           arcWidth={0.3} 
-                           arcPadding={0.02}
-                           formatTextValue={value => value - 50}
-                        />
+                        <Card>
+                            <CardBody>
+                                <CardTitle>Streak Count</CardTitle>
+                            </CardBody>
+                            <GaugeChart id="gauge-chart" 
+                                nrOfLevels={50}
+                                colors={['#00ff00', '#00ffff', '#0000ff']}
+                                percent={this.state.streak}
+                                arcWidth={0.3} 
+                                arcPadding={0.02}
+                                formatTextValue={value => value - 50}
+                            />
+                        </Card>
                     </div>
                 </div>
                 
