@@ -140,11 +140,10 @@ class LearnWords extends React.Component {
                     </Card>
                     <Card className="learn-card text-center operations">
                         <CardBody>
-                            <Button onClick={this.rememberWord.bind(this)} color='success' className='button-size'><FontAwesomeIcon icon={faCheck} size='2x'/></Button>
-                            <Button onClick={this.dontRememberWord.bind(this)} color='warning' className='button-size'><FontAwesomeIcon icon={faTimes} size='2x'/></Button>
+                            <Button onClick={this.rememberWord.bind(this)} color='twitter' className='btn-round btn-icon choice-button'><FontAwesomeIcon icon={faCheck} size='2x'/></Button>
+                            <Button onClick={this.dontRememberWord.bind(this)} color='warning' className='btn-round btn-icon choice-button'><FontAwesomeIcon icon={faTimes} size='2x'/></Button>
                             <br/>
-                            <br/>
-                            <Button onClick={this.flagWord.bind(this)} color='danger'><FontAwesomeIcon icon={faFlag} size='2x'/></Button>
+                            <Button onClick={this.flagWord.bind(this)} color='danger' className='btn-round btn-icon choice-button'><FontAwesomeIcon icon={faFlag} size='2x'/></Button>
                         </CardBody>
                     </Card>
 

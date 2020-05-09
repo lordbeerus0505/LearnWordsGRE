@@ -91,6 +91,20 @@ button {
     margin-top: 5%;
 }
 
+.unflag-word {
+    width: 70px;
+    float: right;
+    margin-right: 20%;
+}
+
+.choice-button {
+    width: 75px !important; 
+    height: 75px !important;
+    border-radius: 40px !important;
+    margin-left: 5%;
+    margin-right: 5%;;
+}
+
 @media only screen and (max-width: 600px) {
 
     .homepage-modal {
@@ -122,8 +136,7 @@ button {
     }
 
     .alerts {
-        width: 80%;
-        margin-left: 30%;
+        width: 110%;
         text-align: center;
     }
 

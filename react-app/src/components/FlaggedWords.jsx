@@ -1,5 +1,6 @@
 import { Card, CardImg, CardBody, CardTitle, CardText, Button, CardFooter, CardHeader, Alert } from 'reactstrap';
 import { faSignOutAlt,faChevronRight } from '@fortawesome/free-solid-svg-icons'
+import {faFlag} from '@fortawesome/free-regular-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 var React = require('react');
@@ -37,6 +38,27 @@ class FlaggedWords extends React.Component {
 
         var word, meaning
         axios.get('/get-flagged-word', this.state)
+             .then((result) => {
+
+                if (!result.data.Success) {
+                    alert("Cant get word dude :(");
+                } else {
+                    word = result.data.word;
+                    meaning = result.data.meaning;
+
+                    this.setState({
+                        word : word,
+                        meaning : meaning
+                    })
+                }
+                
+             });
+        document.getElementsByClassName('meaning-card')[0].style.visibility = 'hidden';
+    }
+
+    unFlagWord = () => {
+        var word, meaning
+        axios.post('/unflag-word', this.state)
              .then((result) => {
 
                 if (!result.data.Success) {
@@ -98,7 +120,8 @@ class FlaggedWords extends React.Component {
                     </Card>
                     <Card className="learn-card text-center operations">
                         <CardBody>
-                        <Button onClick={this.nextWord.bind(this)} color='primary'><FontAwesomeIcon icon={faChevronRight} size='2x'/></Button>
+                            <Button className='btn-round btn-icon choice-button' onClick={this.nextWord.bind(this)} color='info'><FontAwesomeIcon icon={faFlag} size='2x'/></Button>
+                            <Button className='btn-round btn-icon choice-button' onClick={this.nextWord.bind(this)} color='primary'><FontAwesomeIcon icon={faChevronRight} size='2x'/></Button>
                         </CardBody>
                     </Card>
                 </div>

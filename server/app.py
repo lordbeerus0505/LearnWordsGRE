@@ -227,7 +227,25 @@ def forgot_word():
 
     return {"word" : word, "meaning" : meaning, "Success" : True}
 
-    
+@app.route('/unflag-word', methods = ['POST'])
+def unflag_word():
+    if request.environ.get('HTTP_X_FORWARDED_FOR') is None:
+        ipAddress = request.environ['REMOTE_ADDR']
+    else:
+        ipAddress = request.environ['HTTP_X_FORWARDED_FOR']
+
+    wordUser = Words.objects(hostName = socket.gethostname(), ipAddress = ipAddress).get()
+    word = request.get_json()['word']
+    meaning = request.get_json()['meaning']
+
+    flagged = wordUser.flagged_words
+    del flagged[word]
+    wordUser.flagged_words = flagged
+
+    wordUser.save()
+
+    return get_flagged_words()
+
 @app.route('/check_creds', methods=['GET'])
 def check_creds():
     ipAddress = socket.gethostbyname("")
@@ -308,3 +326,5 @@ def text_chat():
     saveMessageSender(userId,chatWith,message)
     saveMessageReceiver(chatWith,userId,message)
     return 'Yooooo'
+
+
