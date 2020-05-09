@@ -252,7 +252,7 @@ class Main extends React.Component{
                     <div className='streak'>
                         <GaugeChart id="gauge-chart2" 
                            nrOfLevels={50}
-                           colors={['#EA4228', '#F5CD19', '#5BE12C']}
+                           colors={['#000000', '#696969', '#FFFFFF']}
                            percent={this.state.streak}
                            arcWidth={0.3} 
                            arcPadding={0.02}
