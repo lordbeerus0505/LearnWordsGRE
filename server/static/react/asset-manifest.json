@@ -1,8 +1,8 @@
 {
   "files": {
-    "main.css": "/static/react/css/main.ea4da068.chunk.css",
-    "main.js": "/static/react/js/main.9d83778d.chunk.js",
-    "main.js.map": "/static/react/js/main.9d83778d.chunk.js.map",
+    "main.css": "/static/react/css/main.bd5bc930.chunk.css",
+    "main.js": "/static/react/js/main.f2b4ab2f.chunk.js",
+    "main.js.map": "/static/react/js/main.f2b4ab2f.chunk.js.map",
     "runtime-main.js": "/static/react/js/runtime-main.7b9bd531.js",
     "runtime-main.js.map": "/static/react/js/runtime-main.7b9bd531.js.map",
     "css/2.74189dbb.chunk.css": "/static/react/css/2.74189dbb.chunk.css",
@@ -10,16 +10,16 @@
     "js/2.2b5f01c7.chunk.js.map": "/static/react/js/2.2b5f01c7.chunk.js.map",
     "../../templates/index.html": "/static/react/../../templates/index.html",
     "css/2.74189dbb.chunk.css.map": "/static/react/css/2.74189dbb.chunk.css.map",
-    "css/main.ea4da068.chunk.css.map": "/static/react/css/main.ea4da068.chunk.css.map",
+    "css/main.bd5bc930.chunk.css.map": "/static/react/css/main.bd5bc930.chunk.css.map",
     "media/trump.gif": "/static/react/media/trump.7507b0c7.gif",
-    "precache-manifest.193b2f4da83347e195e3075cadf3572f.js": "/static/react/precache-manifest.193b2f4da83347e195e3075cadf3572f.js",
+    "precache-manifest.4ceaeb9187845a20c3c98a42226527ce.js": "/static/react/precache-manifest.4ceaeb9187845a20c3c98a42226527ce.js",
     "service-worker.js": "/static/react/service-worker.js"
   },
   "entrypoints": [
     "js/runtime-main.7b9bd531.js",
     "css/2.74189dbb.chunk.css",
     "js/2.2b5f01c7.chunk.js",
-    "css/main.ea4da068.chunk.css",
-    "js/main.9d83778d.chunk.js"
+    "css/main.bd5bc930.chunk.css",
+    "js/main.f2b4ab2f.chunk.js"
   ]
 }

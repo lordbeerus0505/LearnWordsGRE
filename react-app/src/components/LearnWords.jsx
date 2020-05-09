@@ -126,7 +126,7 @@ class LearnWords extends React.Component {
                 <div className="flagged-words">
                     <Button className='btn-simple btn-round' color='info'  onClick={this.openFlaggedWords.bind(this)}>Flagged Words</Button>
                 </div>
-                <div className="flagged-words">
+                <div className="learnt-words">
                     <Button className='btn-simple btn-round' color='info'  onClick={this.openLearntWords.bind(this)}>Words Learnt</Button>
                 </div>
                 <div className="logout">
