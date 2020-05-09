@@ -166,9 +166,9 @@ def post_streak():
 
     streak = request.get_json()['streakChange']
     wordUser = Words.objects(hostName = socket.gethostname(), ipAddress = ipAddress).get()
-
+    # import pdb; pdb.set_trace()
     if streak == 'increase':
-        if wordUser.streak > 0:
+        if wordUser.streak >= 0:
             wordUser.streak = wordUser.streak + 1
         else:
             wordUser.streak = 0

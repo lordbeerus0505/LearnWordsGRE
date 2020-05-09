@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/static/react/css/main.702ab3e2.chunk.css",
-    "main.js": "/static/react/js/main.e75746d7.chunk.js",
-    "main.js.map": "/static/react/js/main.e75746d7.chunk.js.map",
+    "main.js": "/static/react/js/main.0ec03d40.chunk.js",
+    "main.js.map": "/static/react/js/main.0ec03d40.chunk.js.map",
     "runtime-main.js": "/static/react/js/runtime-main.7b9bd531.js",
     "runtime-main.js.map": "/static/react/js/runtime-main.7b9bd531.js.map",
     "css/2.8f1c7784.chunk.css": "/static/react/css/2.8f1c7784.chunk.css",
@@ -12,7 +12,7 @@
     "css/2.8f1c7784.chunk.css.map": "/static/react/css/2.8f1c7784.chunk.css.map",
     "css/main.702ab3e2.chunk.css.map": "/static/react/css/main.702ab3e2.chunk.css.map",
     "media/trump.gif": "/static/react/media/trump.7507b0c7.gif",
-    "precache-manifest.f7d3e12f376a13250df1b0e1cb8c617d.js": "/static/react/precache-manifest.f7d3e12f376a13250df1b0e1cb8c617d.js",
+    "precache-manifest.632b8ad858e9a72b3bd2f8004ee5fb9e.js": "/static/react/precache-manifest.632b8ad858e9a72b3bd2f8004ee5fb9e.js",
     "service-worker.js": "/static/react/service-worker.js"
   },
   "entrypoints": [
@@ -20,6 +20,6 @@
     "css/2.8f1c7784.chunk.css",
     "js/2.8a600aec.chunk.js",
     "css/main.702ab3e2.chunk.css",
-    "js/main.e75746d7.chunk.js"
+    "js/main.0ec03d40.chunk.js"
   ]
 }

@@ -78,7 +78,8 @@ class Main extends React.Component{
                 console.log("here we are")
             } else {
                 this.setState({
-                    progressBar : result.data.learnt
+                    progressBar : result.data.learnt,
+                    progressBarPercent : (result.data.learnt)*100/800.0
                 });
             }
             });
