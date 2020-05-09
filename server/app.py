@@ -198,6 +198,10 @@ def get_streak():
 
     wordUser = Words.objects(hostName = socket.gethostname(), ipAddress = ipAddress).get()
 
+    if wordUser.streak == None:
+        wordUser.streak = 0
+        wordUser.save()
+
     return {'streak' : wordUser.streak, 'Success' : True}
 
 @app.route('/get-learnt-words', methods=['GET'])
