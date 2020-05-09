@@ -96,6 +96,7 @@ class Main extends React.Component{
                     }, 2000);
                 } else {
                     this.props.history.push('/');
+                    this.toggleModalSignUp();
                     this.setState({
                         message : "SignUp Successful, click on Learn Words to start learning"
                     });
@@ -103,9 +104,22 @@ class Main extends React.Component{
                     setTimeout(function() { 
                         document.getElementsByClassName('alerts-main-page')[0].style.visibility = 'hidden';
                     }, 2000);
+
                 }
              });
         }
+
+        axios.get('/progress-bar', this.state)
+            .then((result) => {
+
+            if (!result.data.Success) {
+                console.log("here we are")
+            } else {
+                this.setState({
+                    progressBar : result.data.learnt
+                });
+            }
+            });
     }
 
     Login = () => {
@@ -122,6 +136,7 @@ class Main extends React.Component{
                     }, 2000);
                 } else {
                     this.props.history.push('/');
+                    this.toggleModalLogin();
                     this.setState({
                         message : "Login Successful, click on Learn Words to start learning"
                     });
@@ -209,7 +224,9 @@ class Main extends React.Component{
                     <div className="giphy text-center">
                         <img src={require('../assets/trump.gif')} alt="loading..." />
                     </div>
+                    <br/>
 
+                    <br/>
                     <div className='progressBar'>
                         <Card>
                             <div className="progress-container progress-info">
