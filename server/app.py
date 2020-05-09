@@ -109,7 +109,7 @@ def home():
 def get_words():
 
     learnt = True
-    # import pdb; pdb.set_trace()
+
     if request.environ.get('HTTP_X_FORWARDED_FOR') is None:
         ipAddress = request.environ['REMOTE_ADDR']
     else:
@@ -117,7 +117,6 @@ def get_words():
 
     wordUser = Words.objects(hostName = socket.gethostname(), ipAddress = ipAddress).get()
     while learnt != False:
-        # wordUser = Words.objects(hostName = socket.gethostname(), ipAddress = getPublicIp()).get()
         word_list = wordUser.word_list
 
         word = random.choice(list(word_list.keys()))
@@ -151,7 +150,7 @@ def progress_bar():
 
     return {"learnt" : count,  "Success" : True}
 
-@app.route('/post-streak', methods=['GET'])
+@app.route('/post-streak', methods=['POST'])
 def post_streak():
 
     learnt = True
@@ -163,11 +162,22 @@ def post_streak():
 
     count = 0
     if not Words.objects(hostName = socket.gethostname(), ipAddress = ipAddress):
-        return {'learnt' : 0, "Success" : True}
+        return {'streak' : 0, "Success" : True}
 
+    streak = request.get_json()['streakChange']
     wordUser = Words.objects(hostName = socket.gethostname(), ipAddress = ipAddress).get()
-    
-    wordUser.streak = wordUser.streak + 1
+
+    if streak == 'increase':
+        if wordUser.streak > 0:
+            wordUser.streak = wordUser.streak + 1
+        else:
+            wordUser.streak = 0
+    elif streak == 'decrease':
+        if wordUser.streak < 0:
+            wordUser.streak = wordUser.streak - 1
+        else:
+            wordUser.streak = 0
+
     wordUser.save()
 
     return {'streak' : wordUser.streak, 'Success' : True}
@@ -187,12 +197,6 @@ def get_streak():
         return {'learnt' : 0, "Success" : True}
 
     wordUser = Words.objects(hostName = socket.gethostname(), ipAddress = ipAddress).get()
-
-    # if not wordUser.streak:
-    #     wordUser.streak = 0
-    #     wordUser.save()
-
-    #     return {'streak' : 0, 'Success' : True}
 
     return {'streak' : wordUser.streak, 'Success' : True}
 
