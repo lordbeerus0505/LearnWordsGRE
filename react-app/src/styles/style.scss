@@ -104,6 +104,13 @@ button {
     margin-left: 5%;
     margin-right: 5%;;
 }
+.xButton {
+    float: right;
+}
+
+.learnt-words {
+    float: left;
+}
 
 @media only screen and (max-width: 600px) {
 
@@ -177,5 +184,9 @@ button {
 
     .operations {
         margin-top: 15%;
+    }
+
+    .xButton {
+        float: right;
     }
 }

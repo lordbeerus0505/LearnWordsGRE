@@ -134,6 +134,24 @@ def get_words():
 
     return {"word" : word, "meaning" : meaning, "Success" : True}
 
+@app.route('/get-learnt-words', methods=['GET'])
+def leart_wrods():
+
+    if request.environ.get('HTTP_X_FORWARDED_FOR') is None:
+        ipAddress = request.environ['REMOTE_ADDR']
+    else:
+        ipAddress = request.environ['HTTP_X_FORWARDED_FOR']
+
+    wordUser = Words.objects(hostName = socket.gethostname(), ipAddress = ipAddress).get()
+
+    word_list = wordUser.word_list
+    learnt_words = {}
+    for w, v in word_list.items():
+        if v[0]['learnt'] == True:
+            learnt_words.update({w:v[0]['meaning']})    
+
+    return {"learnt_words" : learnt_words, "Success" : True}
+
 @app.route('/get-flagged-word', methods=['GET'])
 def get_flagged_words():
 
@@ -177,6 +195,21 @@ def learnt_word():
     meaning = meaning[0]['meaning']
 
     return {"word" : word, "meaning" : meaning, "Success" : True}
+
+@app.route('/not-learnt-word', methods=['POST'])
+def not_learnt_word():
+
+    if request.environ.get('HTTP_X_FORWARDED_FOR') is None:
+        ipAddress = request.environ['REMOTE_ADDR']
+    else:
+        ipAddress = request.environ['HTTP_X_FORWARDED_FOR']
+
+    wordUser = Words.objects(hostName = socket.gethostname(), ipAddress = ipAddress).get()
+    word = request.get_json()['word']
+    wordUser.word_list[word][0].update({'learnt':False})
+    wordUser.save()
+
+    return {"Success" : True}
 
 @app.route('/add-flag', methods=['POST'])
 def add_flag():

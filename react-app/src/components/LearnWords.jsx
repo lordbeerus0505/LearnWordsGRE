@@ -86,6 +86,10 @@ class LearnWords extends React.Component {
         this.props.history.push('/flagged')
     }
 
+    openLearntWords = () => {
+        this.props.history.push('/learnt')
+    }
+
     flagWord = () => {
 
         var word, meaning
@@ -121,6 +125,9 @@ class LearnWords extends React.Component {
                 </div>
                 <div className="flagged-words">
                     <Button className='btn-simple btn-round' color='info'  onClick={this.openFlaggedWords.bind(this)}>Flagged Words</Button>
+                </div>
+                <div className="learnt-words">
+                    <Button className='btn-simple btn-round' color='info'  onClick={this.openLearntWords.bind(this)}>Words Learnt</Button>
                 </div>
                 <div className="logout">
                     <Button className='btn-simple btn-round' color='info'  onClick={this.Logout.bind(this)}><FontAwesomeIcon icon={faSignOutAlt}/></Button>
