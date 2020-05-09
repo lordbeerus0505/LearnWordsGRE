@@ -173,7 +173,7 @@ def post_streak():
         else:
             wordUser.streak = 0
     elif streak == 'decrease':
-        if wordUser.streak < 0:
+        if wordUser.streak <= 0:
             wordUser.streak = wordUser.streak - 1
         else:
             wordUser.streak = 0
