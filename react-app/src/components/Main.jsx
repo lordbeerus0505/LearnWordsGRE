@@ -50,13 +50,15 @@ class Main extends React.Component{
 
     toggleModalLogin() {
         this.setState({
-            modalLogin: !this.state.modalLogin
+            modalLogin: !this.state.modalLogin,
+            isOpen : false
         });
     }
 
     toggleModalSignUp() {
         this.setState({
-            modalSignUp: !this.state.modalSignUp
+            modalSignUp: !this.state.modalSignUp,
+            isOpen : false
         });
     }
 
