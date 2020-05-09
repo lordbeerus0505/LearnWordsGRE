@@ -3,6 +3,7 @@ import { Navbar, Container, NavbarBrand, NavbarToggler, Collapse, Nav, NavItem, 
 import{ Button, Modal, Progress, ModalBody, ModalFooter, Card, InputGroup, InputGroupAddon, InputGroupText, Form , Input, Alert} from 'reactstrap';
 import { faUser, faEnvelope, faKey, faUserCircle } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import GaugeChart from 'react-gauge-chart'
 
 var axios = require('axios');
 
@@ -22,24 +23,15 @@ class Main extends React.Component{
             confirmPassword : '',
             message : '',
             progressBar : 0,
-            progressBarPercent : 0
+            progressBarPercent : 0,
+            streak : 0.5
         };
     }
 
     componentDidMount = () => {
-        axios.get('/progress-bar', this.state)
-             .then((result) => {
 
-                if (!result.data.Success) {
-                    console.log("here we are")
-                } else {
-                    this.setState({
-                        progressBar : result.data.learnt,
-                        progressBarPercent : 100.0*result.data.learnt/800.0
-                    });
-                    console.log('Progress value', this.state.progressBar)
-                }
-             });
+        this.getStreak();
+        this.getProgress();
     }
 
     toggle() {
@@ -60,6 +52,36 @@ class Main extends React.Component{
             modalSignUp: !this.state.modalSignUp,
             isOpen : false
         });
+    }
+
+    getStreak = () => {
+
+        axios.get('/get-streak')
+            .then((result) => {
+
+            if (!result.data.Success) {
+                console.log("here we are")
+            } else {
+                this.setState({
+                    streak : (result.data.streak + 50)/100.0
+                });
+                console.log('Strreak is now', this.state.streak)
+            }
+            });
+    }
+
+    getProgress = () => {
+        axios.get('/progress-bar', this.state)
+            .then((result) => {
+
+            if (!result.data.Success) {
+                console.log("here we are")
+            } else {
+                this.setState({
+                    progressBar : result.data.learnt
+                });
+            }
+            });
     }
 
     onChangeConfirmPassword = (password) => {
@@ -107,21 +129,13 @@ class Main extends React.Component{
                         document.getElementsByClassName('alerts-main-page')[0].style.visibility = 'hidden';
                     }, 2000);
 
+                    this.getStreak();
+                    this.getProgress();
+                    
                 }
              });
         }
 
-        axios.get('/progress-bar', this.state)
-            .then((result) => {
-
-            if (!result.data.Success) {
-                console.log("here we are")
-            } else {
-                this.setState({
-                    progressBar : result.data.learnt
-                });
-            }
-            });
     }
 
     Login = () => {
@@ -147,21 +161,12 @@ class Main extends React.Component{
                         document.getElementsByClassName('alerts-main-page')[0].style.visibility = 'hidden';
                     }, 2000);
 
+                    this.getStreak();
+                    this.getProgress();
+
                 }
              });
 
-        axios.get('/progress-bar', this.state)
-            .then((result) => {
-
-            if (!result.data.Success) {
-                console.log("here we are")
-            } else {
-                this.setState({
-                    progressBar : result.data.learnt
-                });
-            }
-            });
-        
     }
 
     LearnWords = () => {
@@ -206,7 +211,7 @@ class Main extends React.Component{
                 </Navbar>
                 <br/>
                 <div className="alerts-main-page" style={{visibility:"hidden"}} onClick={this.hideAlert.bind(this)}>
-                    <Alert color='warning'>{this.state.message}</Alert>
+                    <Alert color='warning' className='text-center'>{this.state.message}</Alert>
                 </div>
                 <div className="main-body">
                     <div className="content text-center">
@@ -243,6 +248,15 @@ class Main extends React.Component{
                                 <br/>
                             </div>
                         </Card>
+                    </div>
+                    <div className='streak'>
+                        <GaugeChart id="gauge-chart2" 
+                           nrOfLevels={50}
+                           colors={['#EA4228', '#F5CD19', '#5BE12C']}
+                           percent={this.state.streak}
+                           arcWidth={0.3} 
+                           arcPadding={0.02}
+                        />
                     </div>
                 </div>
                 
