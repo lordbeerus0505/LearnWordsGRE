@@ -1,5 +1,5 @@
 import { Card, CardImg, CardBody, CardTitle, CardText, Button, CardFooter, CardHeader, Alert } from 'reactstrap';
-import { faSignOutAlt } from '@fortawesome/free-solid-svg-icons'
+import { faSignOutAlt,faChevronRight } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 var React = require('react');
@@ -11,7 +11,6 @@ class FlaggedWords extends React.Component {
     state = {
         word : "",
         meaning : "",
-        revealMeaning : ""
     }
 
     componentDidMount = () => {
@@ -27,8 +26,7 @@ class FlaggedWords extends React.Component {
                     console.log(result.data)
                     this.setState({
                         word : word,
-                        meaning : meaning,
-                        revealMeaning : ""
+                        meaning : meaning
                     })
 
                 }
@@ -49,18 +47,16 @@ class FlaggedWords extends React.Component {
 
                     this.setState({
                         word : word,
-                        meaning : meaning,
-                        revealMeaning : ""
+                        meaning : meaning
                     })
                 }
                 
              });
+        document.getElementsByClassName('meaning-card')[0].style.visibility = 'hidden';
     }
 
     revealMeaning = () => {
-        this.setState({
-            revealMeaning : this.state.meaning
-        })
+        document.getElementsByClassName('meaning-card')[0].style.visibility = 'visible';
     }
 
     openLearnWords = () => {
@@ -69,6 +65,10 @@ class FlaggedWords extends React.Component {
 
     hideAlert = () => {
         document.getElementsByClassName('alerts')[0].style.visibility = 'hidden';
+    }
+
+    Logout = () => {
+        this.props.history.push("/")
     }
 
     render() {
@@ -84,18 +84,22 @@ class FlaggedWords extends React.Component {
                     <Button className='btn-simple btn-round' color='info'  onClick={this.Logout.bind(this)}><FontAwesomeIcon icon={faSignOutAlt}/></Button>
                 </div>
                 <div className="learn-words">
-                    <Card className="learn-card">
-                        <CardHeader className="text-center">
+                    <Card className="learn-card text-center" 
+                        onMouseOver = {this.revealMeaning.bind(this)}
+                    >
+                        <CardBody>
                             <CardTitle>{this.state.word}</CardTitle>
-                        </CardHeader>
-                        <CardBody className="card-body" className="text-center">
-                            <CardText>{this.state.revealMeaning}</CardText>
-                            <br/>
-                            <Button color='info' onClick={this.revealMeaning.bind(this)}>Reveal</Button>
                         </CardBody>
-                        <CardFooter className="text-center">
-                            <Button onClick={this.nextWord.bind(this)} color='primary'>Next Word</Button>
-                        </CardFooter>
+                    </Card>
+                    <Card className="learn-card text-center meaning-card" style={{visibility:"hidden"}}>
+                        <CardBody>
+                            <CardText className="meaning">{this.state.meaning}</CardText>
+                        </CardBody>
+                    </Card>
+                    <Card className="learn-card text-center operations">
+                        <CardBody>
+                        <Button onClick={this.nextWord.bind(this)} color='primary'><FontAwesomeIcon icon={faChevronRight} size='2x'/></Button>
+                        </CardBody>
                     </Card>
                 </div>
             </div> 
