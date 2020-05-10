@@ -265,6 +265,11 @@ class Main extends React.Component{
                             />
                         </Card>
                     </div>
+                    <div className='leaderboard'>
+                        <Card>
+                            
+                        </Card>
+                    </div>
                 </div>
                 
                 <Modal
