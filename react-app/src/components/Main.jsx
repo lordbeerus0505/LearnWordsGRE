@@ -194,17 +194,17 @@ class Main extends React.Component{
                         <Collapse isOpen={this.state.isOpen} navbar>
                             <Nav navbar>
                                 <NavItem>
-                                    <NavLink onClick={this.toggleModalLogin.bind(this)}>
+                                    <NavLink onClick={this.toggleModalLogin.bind(this)} className='mouseChange'>
                                         Login
                                     </NavLink>
                                 </NavItem>
                                 <NavItem>
-                                    <NavLink onClick={this.toggleModalSignUp.bind(this)}>
+                                    <NavLink onClick={this.toggleModalSignUp.bind(this)} className='mouseChange'>
                                         SignUp
                                     </NavLink>
                                 </NavItem>
                                 <NavItem>
-                                    <NavLink onClick={this.LearnWords.bind(this)}>
+                                    <NavLink onClick={this.LearnWords.bind(this)} className='mouseChange'>
                                         Learn Words
                                     </NavLink>
                                 </NavItem>
