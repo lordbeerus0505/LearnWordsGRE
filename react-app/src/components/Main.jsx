@@ -317,9 +317,8 @@ class Main extends React.Component{
                             <Button
                                 block
                                 className="btn-neutral btn-round get-started"
-                                onSubmit={this.Login.bind(this)}
+                                onClick={this.Login.bind(this)}
                                 size="lg"
-                                type='submit'
                             >
                                 Login
                             </Button>
@@ -407,7 +406,7 @@ class Main extends React.Component{
                             <Button
                                 block
                                 className="btn-neutral btn-round get-started"
-                                onSubmit={this.SignUp.bind(this)}
+                                onClick={this.SignUp.bind(this)}
                                 size="lg"
                             >
                                 Get Started
