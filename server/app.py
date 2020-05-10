@@ -194,13 +194,14 @@ def get_streak():
 
     count = 0
     if not Words.objects(hostName = socket.gethostname(), ipAddress = ipAddress):
-        return {'learnt' : 0, "Success" : True}
+        return {'learnt' : 0, "Success" : False}
 
     wordUser = Words.objects(hostName = socket.gethostname(), ipAddress = ipAddress).get()
 
     if wordUser.streak == None:
         wordUser.streak = 0
         wordUser.save()
+        return {'learnt' : 0, "Success" : False}
 
     return {'streak' : wordUser.streak, 'Success' : True}
 

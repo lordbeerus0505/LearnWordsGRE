@@ -60,7 +60,9 @@ class Main extends React.Component{
             .then((result) => {
 
             if (!result.data.Success) {
-                console.log("here we are")
+                this.setState({
+                    streak : 0.5
+                });
             } else {
                 this.setState({
                     streak : (result.data.streak + 50)/100.0
