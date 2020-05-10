@@ -139,6 +139,11 @@ button {
     float: right;
     width: 20%;
 }
+
+.mouseChange {
+    cursor: pointer;
+}
+
 @media only screen and (max-width: 1700px) {
     .learn-streak {
         margin: auto;
