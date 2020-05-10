@@ -139,7 +139,15 @@ button {
     float: right;
     width: 20%;
 }
-
+@media only screen and (max-width: 1500px) {
+    .learn-streak {
+        margin: auto;
+        margin-top: 5%;
+        margin-right: -5%;
+        float: right;
+        width: 20%;
+    }
+}
 @media only screen and (max-width: 600px) {
 
     .homepage-modal {

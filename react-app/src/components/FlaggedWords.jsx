@@ -120,7 +120,7 @@ class FlaggedWords extends React.Component {
                     </Card>
                     <Card className="learn-card text-center operations">
                         <CardBody>
-                            <Button className='btn-round btn-icon choice-button' onClick={this.nextWord.bind(this)} color='info'><FontAwesomeIcon icon={faFlag} size='2x'/></Button>
+                            <Button className='btn-round btn-icon choice-button' onClick={this.unFlagWord.bind(this)} color='info'><FontAwesomeIcon icon={faFlag} size='2x'/></Button>
                             <Button className='btn-round btn-icon choice-button' onClick={this.nextWord.bind(this)} color='primary'><FontAwesomeIcon icon={faChevronRight} size='2x'/></Button>
                         </CardBody>
                     </Card>
