@@ -201,22 +201,48 @@ class Main extends React.Component{
         const items = []
         var elements = this.state.leaderboard
 
-        for ( let key in elements) {    
-            console.log(key, elements[key])
+        var values = Object.keys(elements).map(function(key) {
+            return [key, elements[key]];
+        });
+        values.sort(function(first, second) {
+            return second[1] - first[1];
+        });
+        
+        for (var i=0; i<values.length; i++) { // now lets iterate in sort order
             let barColor = 'progress-green'
-            if (elements[key]<0) {
+            if (values[i][1]<0) {
                 barColor = 'progress-danger'
             }
+            var key = values[i][0];
+            var value = values[i][1];
             items.push(
 
                 <div className={"progress-container " + barColor}>
                     <span><p className="h5 leaderboardKey">{key}</p></span>
-                    <Progress max="100" value={elements[key]+50} barClassName="progress-bar-info" className='leaderBarValue'>
-                            <span>{elements[key]}</span>
+                    <Progress max="100" value={value+50} barClassName="progress-bar-info" className='leaderBarValue'>
+                            <span>{value}</span>
                     </Progress>
                 </div>
+            
             )
         }
+
+        // for ( let key in elements) {    
+        //     console.log(key, elements[key])
+        //     let barColor = 'progress-green'
+        //     if (elements[key]<0) {
+        //         barColor = 'progress-danger'
+        //     }
+        //     items.push(
+
+        //         <div className={"progress-container " + barColor}>
+        //             <span><p className="h5 leaderboardKey">{key}</p></span>
+        //             <Progress max="100" value={elements[key]+50} barClassName="progress-bar-info" className='leaderBarValue'>
+        //                     <span>{elements[key]}</span>
+        //             </Progress>
+        //         </div>
+        //     )
+        // }
         return(
             <div>
                 <Navbar expand="lg" color="info">

@@ -162,10 +162,6 @@ def get_leaderboard():
     else:
         ipAddress = request.environ['HTTP_X_FORWARDED_FOR']
 
-    count = 0
-    if not Words.objects(hostName = socket.gethostname(), ipAddress = ipAddress):
-        return {'learnt' : 0, "Success" : False}
-
     wordUsers = Words.objects.only('userId','streak')
     ranking = {}
 

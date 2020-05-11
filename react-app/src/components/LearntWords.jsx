@@ -66,6 +66,7 @@ class LearntWords extends React.Component {
         const items = []
         var elements = this.state.learnt_words
         console.log(elements, "list of elements, typs is", typeof(elements))
+
         for ( let key in elements) {    
             items.push(
                 <Card>
