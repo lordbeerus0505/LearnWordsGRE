@@ -204,7 +204,7 @@ class Main extends React.Component{
         var values = Object.keys(elements).map(function(key) {
             return [key, elements[key]];
         });
-        
+
         values.sort(function(first, second) {
             return second[1] - first[1];
         });
@@ -287,6 +287,12 @@ class Main extends React.Component{
                             <div className="progress-container progress-info">
                                 <CardBody>
                                     <CardTitle>Progress</CardTitle>
+                                    <CardText className='fancyFont1'>
+                                        Number of words learnt: {this.state.progressBar}
+                                        <br/>
+                                        Percentage of words completed: {this.state.progressBarPercent}
+                                        <br/>
+                                    </CardText>
                                 </CardBody>
                                 <Progress max="800" value={this.state.progressBar} barClassName="progress-bar-info" className='progressBarValue'>
                                     <span>{this.state.progressBarPercent}%</span>

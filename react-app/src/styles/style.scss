@@ -160,39 +160,12 @@ button {
     cursor: pointer;
 }
 
-// @media only screen and (max-width: 2000px) {
-//     .learn-streak {
-//         margin: auto;
-//         margin-top: 5%;
-//         margin-right: -5%;
-//         float: left;
-//         width: 20%;
-//     }
-// }
+@import url('https://fonts.googleapis.com/css2?family=Cardo&display=swap');
 
-// @media only screen and (max-width: 1480px) and (min-width: 1400px) {
-//     .learn-streak {
-//         margin: 33% auto auto 37%;
-//         float: none;
-//         width: 30%;
-//     }
-// }
-
-// @media only screen and (max-width: 1400px) and (min-width: 1370px) {
-//     .learn-streak {
-//         margin: 34% auto auto 38%;
-//         float: none;
-//         width: 30%;
-//     }
-// }
-
-// @media only screen and (max-width: 1370px) and (min-width: 1270px) {
-//     .learn-streak {
-//         margin: 36% auto auto 39%;
-//         float: none;
-//         width: 30%;
-//     }
-// }
+.fancyFont1 {
+    font-size: large;
+    font-family: 'Cardo', serif;
+}
 
 @media only screen and (max-width: 600px) {
 
