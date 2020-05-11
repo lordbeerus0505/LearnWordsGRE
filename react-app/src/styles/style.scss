@@ -151,8 +151,8 @@ button {
 
 .learn-streak {
     margin: auto;
-    margin-top: 5%;
-    float: right;
+    margin-top: 7%;
+    margin-left: 10%;
     width: 20%;
 }
 
@@ -160,39 +160,39 @@ button {
     cursor: pointer;
 }
 
-@media only screen and (max-width: 1700px) {
-    .learn-streak {
-        margin: auto;
-        margin-top: 5%;
-        margin-right: -5%;
-        float: right;
-        width: 20%;
-    }
-}
+// @media only screen and (max-width: 2000px) {
+//     .learn-streak {
+//         margin: auto;
+//         margin-top: 5%;
+//         margin-right: -5%;
+//         float: left;
+//         width: 20%;
+//     }
+// }
 
-@media only screen and (max-width: 1480px) and (min-width: 1400px) {
-    .learn-streak {
-        margin: 33% auto auto 37%;
-        float: none;
-        width: 30%;
-    }
-}
+// @media only screen and (max-width: 1480px) and (min-width: 1400px) {
+//     .learn-streak {
+//         margin: 33% auto auto 37%;
+//         float: none;
+//         width: 30%;
+//     }
+// }
 
-@media only screen and (max-width: 1400px) and (min-width: 1370px) {
-    .learn-streak {
-        margin: 34% auto auto 38%;
-        float: none;
-        width: 30%;
-    }
-}
+// @media only screen and (max-width: 1400px) and (min-width: 1370px) {
+//     .learn-streak {
+//         margin: 34% auto auto 38%;
+//         float: none;
+//         width: 30%;
+//     }
+// }
 
-@media only screen and (max-width: 1370px) and (min-width: 1270px) {
-    .learn-streak {
-        margin: 36% auto auto 39%;
-        float: none;
-        width: 30%;
-    }
-}
+// @media only screen and (max-width: 1370px) and (min-width: 1270px) {
+//     .learn-streak {
+//         margin: 36% auto auto 39%;
+//         float: none;
+//         width: 30%;
+//     }
+// }
 
 @media only screen and (max-width: 600px) {
 
