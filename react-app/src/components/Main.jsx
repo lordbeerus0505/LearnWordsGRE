@@ -1,5 +1,5 @@
 import React from 'react';
-import { Navbar, Container, NavbarBrand, NavbarToggler, Collapse, Nav, NavItem, NavLink, CardBody, CardTitle } from 'reactstrap';
+import { Navbar, Container, NavbarBrand, NavbarToggler, Collapse, Nav, NavItem, NavLink, CardBody, CardTitle, CardText } from 'reactstrap';
 import{ Button, Modal, Progress, ModalBody, ModalFooter, Card, InputGroup, InputGroupAddon, InputGroupText, Form , Input, Alert} from 'reactstrap';
 import { faUser, faEnvelope, faKey, faUserCircle } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -24,12 +24,14 @@ class Main extends React.Component{
             message : '',
             progressBar : 0,
             progressBarPercent : 0,
-            streak : 0.5
+            streak : 0.5,
+            leaderboard : {}
         };
     }
 
     componentDidMount = () => {
 
+        this.getLeaderboard();
         this.getStreak();
         this.getProgress();
     }
@@ -54,6 +56,22 @@ class Main extends React.Component{
         });
     }
 
+    getLeaderboard = () => {
+        axios.get('/get-leaderboard')
+            .then((result) => {
+
+            if (!result.data.Success) {
+                this.setState({
+                    leaderboard : {}
+                });
+            } else {
+                this.setState({
+                    leaderboard : result.data.leader_board
+                });
+            }
+            });
+    }
+
     getStreak = () => {
 
         axios.get('/get-streak')
@@ -67,7 +85,6 @@ class Main extends React.Component{
                 this.setState({
                     streak : (result.data.streak + 50)/100.0
                 });
-                console.log('Strreak is now', this.state.streak)
             }
             });
     }
@@ -181,6 +198,21 @@ class Main extends React.Component{
     }
 
     render(){
+        const items = []
+        var elements = this.state.leaderboard
+        console.log(elements, "list of elements, typs is", typeof(elements))
+        for ( let key in elements) {    
+            items.push(
+                <Card>
+                    <CardBody>
+                        <CardTitle>
+                            {key} is the key
+                        </CardTitle>
+                        <CardText className="meaning">{elements[key]}</CardText>
+                    </CardBody>
+                </Card>
+            )
+        }
         return(
             <div>
                 <Navbar expand="lg" color="info">
@@ -267,7 +299,10 @@ class Main extends React.Component{
                     </div>
                     <div className='leaderboard'>
                         <Card>
-                            
+                            <CardBody>
+                                <CardTitle>Leaderboard</CardTitle>
+
+                            </CardBody>
                         </Card>
                     </div>
                 </div>

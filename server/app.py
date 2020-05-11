@@ -164,15 +164,15 @@ def get_leaderboard():
 
     count = 0
     if not Words.objects(hostName = socket.gethostname(), ipAddress = ipAddress):
-        return {'learnt' : 0, "Success" : True}
+        return {'learnt' : 0, "Success" : False}
 
     wordUsers = Words.objects.only('userId','streak')
     ranking = {}
-    
-    for u in wordUsers:
-        ranking[u.streak] = u.userId
 
-    leader_board = dict(sorted(ranking.items(), key=operator.itemgetter(0),reverse=True))
+    for u in wordUsers:
+        ranking[u.userId] = u.streak
+
+    leader_board = dict(sorted(ranking.items(), key=operator.itemgetter(1),reverse=True))
 
     return {"leader_board" : leader_board,  "Success" : True}
 
