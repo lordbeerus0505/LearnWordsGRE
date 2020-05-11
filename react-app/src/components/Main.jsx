@@ -204,6 +204,7 @@ class Main extends React.Component{
         var values = Object.keys(elements).map(function(key) {
             return [key, elements[key]];
         });
+        
         values.sort(function(first, second) {
             return second[1] - first[1];
         });
@@ -216,14 +217,12 @@ class Main extends React.Component{
             var key = values[i][0];
             var value = values[i][1];
             items.push(
-
                 <div className={"progress-container " + barColor}>
                     <span><p className="h5 leaderboardKey">{key}</p></span>
                     <Progress max="100" value={value+50} barClassName="progress-bar-info" className='leaderBarValue'>
                             <span>{value}</span>
                     </Progress>
                 </div>
-            
             )
         }
 
