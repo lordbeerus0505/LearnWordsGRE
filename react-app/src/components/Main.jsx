@@ -227,22 +227,6 @@ class Main extends React.Component{
             )
         }
 
-        // for ( let key in elements) {    
-        //     console.log(key, elements[key])
-        //     let barColor = 'progress-green'
-        //     if (elements[key]<0) {
-        //         barColor = 'progress-danger'
-        //     }
-        //     items.push(
-
-        //         <div className={"progress-container " + barColor}>
-        //             <span><p className="h5 leaderboardKey">{key}</p></span>
-        //             <Progress max="100" value={elements[key]+50} barClassName="progress-bar-info" className='leaderBarValue'>
-        //                     <span>{elements[key]}</span>
-        //             </Progress>
-        //         </div>
-        //     )
-        // }
         return(
             <div>
                 <Navbar expand="lg" color="info">
@@ -333,6 +317,7 @@ class Main extends React.Component{
                                 <CardTitle>Leaderboard</CardTitle>
                             </CardBody>
                                 {items}
+                                <br/>
                         </Card>
                     </div>
                 </div>
