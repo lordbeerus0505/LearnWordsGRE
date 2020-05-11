@@ -290,7 +290,7 @@ class Main extends React.Component{
                                     <CardText className='fancyFont1'>
                                         Number of words learnt: {this.state.progressBar}
                                         <br/>
-                                        Percentage of words completed: {this.state.progressBarPercent}
+                                        Percentage of words completed: {this.state.progressBarPercent}%
                                         <br/>
                                     </CardText>
                                 </CardBody>
