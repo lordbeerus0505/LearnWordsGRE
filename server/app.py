@@ -172,9 +172,8 @@ def get_leaderboard():
     for u in wordUsers:
         ranking[u.userId] = u.streak
 
-    leader_board = dict(sorted(ranking.items(), key=operator.itemgetter(1),reverse=True))
 
-    return {"leader_board" : leader_board,  "Success" : True}
+    return {"leader_board" : ranking,  "Success" : True}
 
 @app.route('/post-streak', methods=['POST'])
 def post_streak():
