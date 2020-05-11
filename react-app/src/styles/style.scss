@@ -156,6 +156,22 @@ button {
     width: 20%;
 }
 
+@import url('https://fonts.googleapis.com/css2?family=Merriweather&display=swap');
+
+.homeText {
+    font-family: 'Merriweather', serif;
+    color: white;
+    font-size: x-large;
+    width: 35%;
+}
+
+.homeGif {
+    width: 45%;
+    margin-left: 55%;
+    margin-top: -27%;
+    padding: 5%;
+}
+
 .mouseChange {
     cursor: pointer;
 }

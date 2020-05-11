@@ -273,12 +273,25 @@ class Main extends React.Component{
                             <li><h3>Flag words that you have a difficulty remembering</h3></li>
                             <li><h3>AI based word iteration to help you learn fastest</h3></li>
                             <li><h3>Keep track of your performance with a streak count</h3></li>
+
                         </ul>
                     </div>
-                    
-                    <div className="giphy text-center">
-                        <img src={require('../assets/trump.gif')} alt="loading..." />
+
+                    <div className="content text-center">
+                        <Card>
+                            <div>
+                                <Card className='homeText'>
+                                    Use AI to speed up your learning
+                                    <br/>
+                                    We use advanced neural networks used in predicting words you are less likely at remembering rendering them at appropriate intervals
+                                </Card>
+                            </div>
+                            <div className='homeGif'>                        
+                                <img src={require('../assets/ai.gif')} alt="loading..." />
+                            </div>
+                        </Card>
                     </div>
+
                     <br/>
 
                     <br/>
