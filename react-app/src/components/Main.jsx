@@ -1,5 +1,5 @@
 import React from 'react';
-import { Navbar, Container, NavbarBrand, NavbarToggler, Collapse, Nav, NavItem, NavLink, CardBody, CardTitle } from 'reactstrap';
+import { Navbar, Container, NavbarBrand, NavbarToggler, Collapse, Nav, NavItem, NavLink, CardBody, CardTitle, CardText } from 'reactstrap';
 import{ Button, Modal, Progress, ModalBody, ModalFooter, Card, InputGroup, InputGroupAddon, InputGroupText, Form , Input, Alert} from 'reactstrap';
 import { faUser, faEnvelope, faKey, faUserCircle } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -24,12 +24,14 @@ class Main extends React.Component{
             message : '',
             progressBar : 0,
             progressBarPercent : 0,
-            streak : 0.5
+            streak : 0.5,
+            leaderboard : {}
         };
     }
 
     componentDidMount = () => {
 
+        this.getLeaderboard();
         this.getStreak();
         this.getProgress();
     }
@@ -54,6 +56,22 @@ class Main extends React.Component{
         });
     }
 
+    getLeaderboard = () => {
+        axios.get('/get-leaderboard')
+            .then((result) => {
+
+            if (!result.data.Success) {
+                this.setState({
+                    leaderboard : {}
+                });
+            } else {
+                this.setState({
+                    leaderboard : result.data.leader_board
+                });
+            }
+            });
+    }
+
     getStreak = () => {
 
         axios.get('/get-streak')
@@ -67,7 +85,6 @@ class Main extends React.Component{
                 this.setState({
                     streak : (result.data.streak + 50)/100.0
                 });
-                console.log('Strreak is now', this.state.streak)
             }
             });
     }
@@ -181,6 +198,35 @@ class Main extends React.Component{
     }
 
     render(){
+        const items = []
+        var elements = this.state.leaderboard
+
+        var values = Object.keys(elements).map(function(key) {
+            return [key, elements[key]];
+        });
+        values.sort(function(first, second) {
+            return second[1] - first[1];
+        });
+        
+        for (var i=0; i<values.length; i++) { // now lets iterate in sort order
+            let barColor = 'progress-green'
+            if (values[i][1]<0) {
+                barColor = 'progress-danger'
+            }
+            var key = values[i][0];
+            var value = values[i][1];
+            items.push(
+
+                <div className={"progress-container " + barColor}>
+                    <span><p className="h5 leaderboardKey">{key}</p></span>
+                    <Progress max="100" value={value+50} barClassName="progress-bar-info" className='leaderBarValue'>
+                            <span>{value}</span>
+                    </Progress>
+                </div>
+            
+            )
+        }
+
         return(
             <div>
                 <Navbar expand="lg" color="info">
@@ -263,6 +309,15 @@ class Main extends React.Component{
                                 arcPadding={0.02}
                                 formatTextValue={value => value - 50}
                             />
+                        </Card>
+                    </div>
+                    <div className='leaderboard'>
+                        <Card>
+                            <CardBody>
+                                <CardTitle>Leaderboard</CardTitle>
+                            </CardBody>
+                                {items}
+                                <br/>
                         </Card>
                     </div>
                 </div>

@@ -10,8 +10,10 @@ from flask import request
 from server.words import WordLists
 app = Flask(__name__)
 from urllib.request import urlopen
+import operator
 import re
 from mongoengine import *
+from collections import OrderedDict
 connect("barrons",host='mongodb+srv://abhiram:abhiram@cluster0-snm3i.mongodb.net/test?retryWrites=true&w=majority')
 
 
@@ -150,6 +152,25 @@ def progress_bar():
 
     return {"learnt" : count,  "Success" : True}
 
+@app.route('/get-leaderboard', methods=['GET'])
+def get_leaderboard():
+
+    learnt = True
+
+    if request.environ.get('HTTP_X_FORWARDED_FOR') is None:
+        ipAddress = request.environ['REMOTE_ADDR']
+    else:
+        ipAddress = request.environ['HTTP_X_FORWARDED_FOR']
+
+    wordUsers = Words.objects.only('userId','streak')
+    ranking = {}
+
+    for u in wordUsers:
+        ranking[u.userId] = u.streak
+
+
+    return {"leader_board" : ranking,  "Success" : True}
+
 @app.route('/post-streak', methods=['POST'])
 def post_streak():
 
@@ -166,7 +187,7 @@ def post_streak():
 
     streak = request.get_json()['streakChange']
     wordUser = Words.objects(hostName = socket.gethostname(), ipAddress = ipAddress).get()
-    # import pdb; pdb.set_trace()
+
     if streak == 'increase':
         if wordUser.streak >= 0:
             wordUser.streak = wordUser.streak + 1
@@ -206,7 +227,7 @@ def get_streak():
     return {'streak' : wordUser.streak, 'Success' : True}
 
 @app.route('/get-learnt-words', methods=['GET'])
-def leart_wrods():
+def get_learnt_words():
 
     if request.environ.get('HTTP_X_FORWARDED_FOR') is None:
         ipAddress = request.environ['REMOTE_ADDR']
