@@ -200,17 +200,21 @@ class Main extends React.Component{
     render(){
         const items = []
         var elements = this.state.leaderboard
-        console.log(elements, "list of elements, typs is", typeof(elements))
+
         for ( let key in elements) {    
+            console.log(key, elements[key])
+            let barColor = 'progress-green'
+            if (elements[key]<0) {
+                barColor = 'progress-danger'
+            }
             items.push(
-                <Card>
-                    <CardBody>
-                        <CardTitle>
-                            {key} is the key
-                        </CardTitle>
-                        <CardText className="meaning">{elements[key]}</CardText>
-                    </CardBody>
-                </Card>
+
+                <div className={"progress-container " + barColor}>
+                    <span><p className="h5 leaderboardKey">{key}</p></span>
+                    <Progress max="100" value={elements[key]+50} barClassName="progress-bar-info" className='leaderBarValue'>
+                            <span>{elements[key]}</span>
+                    </Progress>
+                </div>
             )
         }
         return(
@@ -301,8 +305,8 @@ class Main extends React.Component{
                         <Card>
                             <CardBody>
                                 <CardTitle>Leaderboard</CardTitle>
-
                             </CardBody>
+                                {items}
                         </Card>
                     </div>
                 </div>

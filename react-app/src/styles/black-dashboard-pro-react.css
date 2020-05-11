@@ -13765,6 +13765,14 @@ textarea.form-control {
     background-image: linear-gradient(to bottom left, #ec250d, #fd5d93, #ec250d);
     background-size: 210% 210%;
     background-position: top right; }
+  .progress-container.progress-green .progress-bar {
+    background: #0098f0;
+    background-image: -webkit-linear-gradient(to bottom left, #31ff98, #12cf67, #31f04b);
+    background-image: -o-linear-gradient(to bottom left, #31ff98, #12cf67, #31f04b);
+    background-image: -moz-linear-gradient(to bottom left, #31ff98, #12cf67, #31f04b);
+    background-image: linear-gradient(to bottom left, #31ff98, #12cf67, #31f04b);
+    background-size: 210% 210%;
+    background-position: top right; }
 
 .card-chart .progress-container + .progress-container,
 .card-chart .progress-container ~ .progress-container {

@@ -122,10 +122,26 @@ button {
     margin: auto;
 }
 
+.leaderboard {
+    width: 40%;
+    margin: auto;
+}
+
 .progressBarValue {
     width: 80%;
     height: 30px;
     margin: auto;
+}
+
+.leaderBarValue {
+    width: 80%;
+    height: 15px;
+    margin: auto;
+}
+
+.leaderboardKey {
+    margin: auto;
+    margin-left: 10%;
 }
 
 .progressBadgePosition {
