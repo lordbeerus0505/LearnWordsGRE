@@ -279,12 +279,22 @@ class Main extends React.Component{
 
                     <div className="content text-center">
                         <div className='homeGif'>
-                            <img src={require('../assets/ai.gif')} alt="loading..." style={{float:"left"}} />
+                            <img src={require('../assets/book.gif')} alt="loading..." style={{float:"left"}} />
                         </div>
                         <p className='homeText'>
-                            Use AI to speed up your learning
+                            Access to the Essential 800
                             <br/>
-                            <span style={{fontSize:'large'}}>Advanced neural networks used to predict words you are less likely at remembering render them at appropriate intervals</span>
+                            <span style={{fontSize:'large'}}>No need to carry heavy books. Get access to the list, anytime, anywhere, on your PC or Mobile Browser while on the go.</span>
+                        </p>
+                    </div>
+                    <div className="content text-center">
+                        <div className='homeGif'>
+                            <img src={require('../assets/flag.gif')} alt="loading..." style={{float:"left"}} />
+                        </div>
+                        <p className='homeText'>
+                            Flag Words
+                            <br/>
+                            <span style={{fontSize:'large'}}>Finding it hard to remember a word and need frequent exposure to it? Just flag it! </span>
                         </p>
                     </div>
                     <div className="content text-center">
@@ -299,12 +309,12 @@ class Main extends React.Component{
                     </div>
                     <div className="content text-center">
                         <div className='homeGif'>
-                            <img src={require('../assets/ai.gif')} alt="loading..." style={{float:"left"}} />
+                            <img src={require('../assets/motivation.gif')} alt="loading..." style={{float:"left"}} />
                         </div>
                         <p className='homeText'>
-                            Use AI to speed up your learning
+                            Motivation is everything
                             <br/>
-                            <span style={{fontSize:'large'}}>Advanced neural networks used to predict words you are less likely at remembering render them at appropriate intervals</span>
+                            <span style={{fontSize:'large'}}>Compete with your friends over at the leaderboard to see how each of you fare. After all, a healthy competition is bound to be good</span>
                         </p>
                     </div>
                     <div className='progressBar'>
