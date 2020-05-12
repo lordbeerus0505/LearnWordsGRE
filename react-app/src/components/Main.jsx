@@ -278,23 +278,35 @@ class Main extends React.Component{
                     </div>
 
                     <div className="content text-center">
-                        <Card>
-                            <div>
-                                <Card className='homeText'>
-                                    Use AI to speed up your learning
-                                    <br/>
-                                    We use advanced neural networks used in predicting words you are less likely at remembering rendering them at appropriate intervals
-                                </Card>
-                            </div>
-                            <div className='homeGif'>                        
-                                <img src={require('../assets/ai.gif')} alt="loading..." />
-                            </div>
-                        </Card>
+                        <div className='homeGif'>
+                            <img src={require('../assets/ai.gif')} alt="loading..." style={{float:"left"}} />
+                        </div>
+                        <p className='homeText'>
+                            Use AI to speed up your learning
+                            <br/>
+                            <span style={{fontSize:'large'}}>Advanced neural networks used to predict words you are less likely at remembering render them at appropriate intervals</span>
+                        </p>
                     </div>
-
-                    <br/>
-
-                    <br/>
+                    <div className="content text-center">
+                        <div className='homeGif'>
+                            <img src={require('../assets/ai.gif')} alt="loading..." style={{float:"left"}} />
+                        </div>
+                        <p className='homeText'>
+                            Use AI to speed up your learning
+                            <br/>
+                            <span style={{fontSize:'large'}}>Advanced neural networks used to predict words you are less likely at remembering render them at appropriate intervals</span>
+                        </p>
+                    </div>
+                    <div className="content text-center">
+                        <div className='homeGif'>
+                            <img src={require('../assets/ai.gif')} alt="loading..." style={{float:"left"}} />
+                        </div>
+                        <p className='homeText'>
+                            Use AI to speed up your learning
+                            <br/>
+                            <span style={{fontSize:'large'}}>Advanced neural networks used to predict words you are less likely at remembering render them at appropriate intervals</span>
+                        </p>
+                    </div>
                     <div className='progressBar'>
                         <Card>
                             <div className="progress-container progress-info">

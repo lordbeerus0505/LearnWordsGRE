@@ -42,9 +42,9 @@ button {
 }
 
 .content {
-    width: 60%;
-    margin: auto;
-    margin-top: 2%;
+    width: 50%;
+    margin: 2% auto auto;
+    padding-bottom: 20%;
 }
 
 .giphy {
@@ -162,14 +162,13 @@ button {
     font-family: 'Merriweather', serif;
     color: white;
     font-size: x-large;
-    width: 35%;
+    width: 40%;
+    float: right;
 }
 
 .homeGif {
     width: 45%;
-    margin-left: 55%;
-    margin-top: -27%;
-    padding: 5%;
+    padding-right: 5%;
 }
 
 .mouseChange {
