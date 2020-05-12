@@ -198,7 +198,7 @@ class Main extends React.Component{
     }
 
     scrollDown = () => {
-        window.scrollTo(0,500)
+        window.scrollTo({left:0,top:500,behavior: 'smooth'})
     }
 
     render(){
