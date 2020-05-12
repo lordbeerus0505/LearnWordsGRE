@@ -218,7 +218,7 @@ button {
     }
 
     .content {
-        width: 60%;
+        width: 90%;
         margin: auto;
         margin-top: 10%;
     }
@@ -290,5 +290,21 @@ button {
     .leaderboard {
         width: 90%;
         margin: auto;
+    }
+
+    .homeText {
+        font-family: 'Merriweather', serif;
+        color: white;
+        font-size: x-large;
+        width: 90%;
+        margin: auto;
+        margin-right: 5%;
+        padding: 5%;
+    }
+    
+    .homeGif {
+        width: 105%;
+        margin: auto;
+
     }
 }

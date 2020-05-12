@@ -264,17 +264,7 @@ class Main extends React.Component{
                 <div className="main-body">
                     <div className="content text-center">
                         <h1>Learn GRE words taken from the Essential 800 words of Barron's List</h1>
-                        <h2>SignUp to Get Started</h2>
-                        <br/>
-                        <br/>
-                        <h2>Features:</h2>
-                        <ul>
-                            <li><h3>One stop to ace the GRE verbal</h3></li>
-                            <li><h3>Flag words that you have a difficulty remembering</h3></li>
-                            <li><h3>AI based word iteration to help you learn fastest</h3></li>
-                            <li><h3>Keep track of your performance with a streak count</h3></li>
-
-                        </ul>
+                        <h2>SignUp to Get Started</h2>                        
                     </div>
 
                     <div className="content text-center">
