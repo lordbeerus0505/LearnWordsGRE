@@ -48,6 +48,13 @@ button {
     font-family: 'Merriweather', serif;
 }
 
+.headings {
+    width: 50%;
+    margin: 2% auto auto;
+    font-family: 'Merriweather', serif;
+    padding-bottom: 10%;
+}
+
 .giphy {
     width: 500px;
     margin: auto;
@@ -183,7 +190,7 @@ button {
     font-family: 'Cardo', serif;
 }
 
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 800px) {
 
     .homepage-modal {
         margin: auto !important;
@@ -222,6 +229,13 @@ button {
         width: 90%;
         margin: auto;
         margin-top: 10%;
+    }
+
+    .headings {
+        width: 90%;
+        margin: auto;
+        margin-top: 10%;
+        padding-bottom: 10%;
     }
 
     .giphy {

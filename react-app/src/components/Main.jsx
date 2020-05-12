@@ -1,7 +1,7 @@
 import React from 'react';
 import { Navbar, Container, NavbarBrand, NavbarToggler, Collapse, Nav, NavItem, NavLink, CardBody, CardTitle, CardText } from 'reactstrap';
 import{ Button, Modal, Progress, ModalBody, ModalFooter, Card, InputGroup, InputGroupAddon, InputGroupText, Form , Input, Alert} from 'reactstrap';
-import { faUser, faEnvelope, faKey, faUserCircle } from '@fortawesome/free-solid-svg-icons'
+import { faUser, faEnvelope, faKey, faUserCircle, faChevronDown } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import GaugeChart from 'react-gauge-chart'
 
@@ -197,6 +197,10 @@ class Main extends React.Component{
         document.getElementsByClassName('alerts')[0].style.visibility = 'hidden';
     }
 
+    scrollDown = () => {
+        window.scrollTo(0,500)
+    }
+
     render(){
         const items = []
         var elements = this.state.leaderboard
@@ -262,11 +266,13 @@ class Main extends React.Component{
                     <Alert color='warning' className='text-center'>{this.state.message}</Alert>
                 </div>
                 <div className="main-body">
-                    <div className="content text-center">
+                    <div className="headings text-center">
                         <h1>Learn GRE words taken from the Essential 800 words of Barron's List</h1>
                         <h2>SignUp to Get Started</h2>                        
                     </div>
-
+                    <div className="text-center">
+                        <Button className='btn-simple btn-icon btn-round choice-button' onClick={this.scrollDown.bind(this)}><FontAwesomeIcon icon={faChevronDown} size='3x'/></Button>
+                    </div>
                     <div className="content text-center">
                         <div className='homeGif'>
                             <img src={require('../assets/book.gif')} alt="loading..." style={{float:"left"}} />
