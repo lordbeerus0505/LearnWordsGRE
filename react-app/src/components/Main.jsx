@@ -264,24 +264,49 @@ class Main extends React.Component{
                 <div className="main-body">
                     <div className="content text-center">
                         <h1>Learn GRE words taken from the Essential 800 words of Barron's List</h1>
-                        <h2>SignUp to Get Started</h2>
-                        <br/>
-                        <br/>
-                        <h2>Features:</h2>
-                        <ul>
-                            <li><h3>One stop to ace the GRE verbal</h3></li>
-                            <li><h3>Flag words that you have a difficulty remembering</h3></li>
-                            <li><h3>AI based word iteration to help you learn fastest</h3></li>
-                            <li><h3>Keep track of your performance with a streak count</h3></li>
-                        </ul>
+                        <h2>SignUp to Get Started</h2>                        
                     </div>
-                    
-                    <div className="giphy text-center">
-                        <img src={require('../assets/trump.gif')} alt="loading..." />
-                    </div>
-                    <br/>
 
-                    <br/>
+                    <div className="content text-center">
+                        <div className='homeGif'>
+                            <img src={require('../assets/book.gif')} alt="loading..." style={{float:"left"}} />
+                        </div>
+                        <p className='homeText'>
+                            Access to the Essential 800
+                            <br/>
+                            <span style={{fontSize:'large'}}>No need to carry heavy books. Get access to the list, anytime, anywhere, on your PC or Mobile Browser while on the go.</span>
+                        </p>
+                    </div>
+                    <div className="content text-center">
+                        <div className='homeGif'>
+                            <img src={require('../assets/flag.gif')} alt="loading..." style={{float:"left"}} />
+                        </div>
+                        <p className='homeText'>
+                            Flag Words
+                            <br/>
+                            <span style={{fontSize:'large'}}>Finding it hard to remember a word and need frequent exposure to it? Just flag it! </span>
+                        </p>
+                    </div>
+                    <div className="content text-center">
+                        <div className='homeGif'>
+                            <img src={require('../assets/ai.gif')} alt="loading..." style={{float:"left"}} />
+                        </div>
+                        <p className='homeText'>
+                            Use AI to speed up your learning
+                            <br/>
+                            <span style={{fontSize:'large'}}>Advanced neural networks used to predict words you are less likely at remembering render them at appropriate intervals</span>
+                        </p>
+                    </div>
+                    <div className="content text-center">
+                        <div className='homeGif'>
+                            <img src={require('../assets/motivation.gif')} alt="loading..." style={{float:"left"}} />
+                        </div>
+                        <p className='homeText'>
+                            Motivation is everything
+                            <br/>
+                            <span style={{fontSize:'large'}}>Compete with your friends over at the leaderboard to see how each of you fare. After all, a healthy competition is bound to be good</span>
+                        </p>
+                    </div>
                     <div className='progressBar'>
                         <Card>
                             <div className="progress-container progress-info">

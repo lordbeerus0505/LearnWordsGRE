@@ -42,9 +42,10 @@ button {
 }
 
 .content {
-    width: 60%;
-    margin: auto;
-    margin-top: 2%;
+    width: 50%;
+    margin: 2% auto auto;
+    padding-bottom: 20%;
+    font-family: 'Merriweather', serif;
 }
 
 .giphy {
@@ -156,6 +157,21 @@ button {
     width: 20%;
 }
 
+@import url('https://fonts.googleapis.com/css2?family=Merriweather&display=swap');
+
+.homeText {
+    font-family: 'Merriweather', serif;
+    color: white;
+    font-size: x-large;
+    width: 40%;
+    float: right;
+}
+
+.homeGif {
+    width: 45%;
+    padding-right: 5%;
+}
+
 .mouseChange {
     cursor: pointer;
 }
@@ -203,7 +219,7 @@ button {
     }
 
     .content {
-        width: 60%;
+        width: 90%;
         margin: auto;
         margin-top: 10%;
     }
@@ -275,5 +291,21 @@ button {
     .leaderboard {
         width: 90%;
         margin: auto;
+    }
+
+    .homeText {
+        font-family: 'Merriweather', serif;
+        color: white;
+        font-size: x-large;
+        width: 90%;
+        margin: auto;
+        margin-right: 5%;
+        padding: 5%;
+    }
+    
+    .homeGif {
+        width: 105%;
+        margin: auto;
+
     }
 }
