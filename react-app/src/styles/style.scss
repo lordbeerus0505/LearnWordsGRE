@@ -135,6 +135,12 @@ button {
     margin: auto;
 }
 
+.wordlist {
+    width: 40%;
+    margin: auto;
+    font-family: 'Merriweather', serif;
+}
+
 .progressBarValue {
     width: 80%;
     height: 30px;
@@ -303,6 +309,11 @@ button {
     }
 
     .leaderboard {
+        width: 90%;
+        margin: auto;
+    }
+
+    .wordlist {
         width: 90%;
         margin: auto;
     }

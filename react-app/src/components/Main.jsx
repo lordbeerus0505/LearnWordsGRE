@@ -4,6 +4,7 @@ import{ Button, Modal, Progress, ModalBody, ModalFooter, Card, InputGroup, Input
 import { faUser, faEnvelope, faKey, faUserCircle, faChevronDown } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import GaugeChart from 'react-gauge-chart'
+import HomeWordList from './HomeWordList';
 
 var axios = require('axios');
 
@@ -355,6 +356,14 @@ class Main extends React.Component{
                                 {items}
                                 <br/>
                         </Card>
+                    </div>
+                    <div className='wordlist'>
+                        <Card>
+                            <CardBody>
+                                <CardTitle>The Essential 800 List</CardTitle>
+                            </CardBody>
+                        </Card>
+                        <HomeWordList />
                     </div>
                 </div>
                 

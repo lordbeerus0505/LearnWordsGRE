@@ -168,8 +168,27 @@ def get_leaderboard():
     for u in wordUsers:
         ranking[u.userId] = u.streak
 
-
     return {"leader_board" : ranking,  "Success" : True}
+
+@app.route('/get-word-list', methods=['GET'])
+def get_word_list():
+
+    learnt = True
+
+    if request.environ.get('HTTP_X_FORWARDED_FOR') is None:
+        ipAddress = request.environ['REMOTE_ADDR']
+    else:
+        ipAddress = request.environ['HTTP_X_FORWARDED_FOR']
+
+    obj = WordLists()
+    word_list = obj.word_list()[0]
+    all_words = {}
+
+    for w, v in word_list.items():
+        all_words.update({w:v[0]['meaning']})  
+
+
+    return {"word_list" : all_words,  "Success" : True}
 
 @app.route('/post-streak', methods=['POST'])
 def post_streak():
