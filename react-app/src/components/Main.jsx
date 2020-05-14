@@ -394,7 +394,7 @@ class Main extends React.Component{
                                     <div>
                                         <FontAwesomeIcon icon={faEnvelope} size='2x'/>
                                         <Input
-                                                placeholder="Email Address"
+                                                placeholder="Username"
                                                 className="modalInput"
                                                 type="text"
                                                 onChange = {this.onChangeEmail.bind(this)}
@@ -452,7 +452,7 @@ class Main extends React.Component{
                                     <div>
                                         <FontAwesomeIcon icon={faEnvelope} size='2x'/>
                                         <Input
-                                                placeholder="Email Address"
+                                                placeholder="Username"
                                                 className="modalInput"
                                                 type="text"
                                                 onChange = {this.onChangeEmail.bind(this)}
