@@ -99,7 +99,7 @@ class Main extends React.Component{
             } else {
                 this.setState({
                     progressBar : result.data.learnt,
-                    progressBarPercent : (result.data.learnt)*100/800.0
+                    progressBarPercent : (result.data.learnt)*100/994.0 //800 with barrons
                 });
             }
             });
@@ -326,7 +326,7 @@ class Main extends React.Component{
                                         <br/>
                                     </CardText>
                                 </CardBody>
-                                <Progress max="800" value={this.state.progressBar} barClassName="progress-bar-info" className='progressBarValue'>
+                                <Progress max="994" value={this.state.progressBar} barClassName="progress-bar-info" className='progressBarValue'>
                                     <span>{this.state.progressBarPercent}%</span>
                                 </Progress>
                                 <br/>
